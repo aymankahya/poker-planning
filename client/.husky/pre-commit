@@ -1,0 +1,5 @@
+cd client
+npm run test:ci
+npm run lint
+
+exit 1
