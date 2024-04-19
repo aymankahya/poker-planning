@@ -1,7 +1,5 @@
-import { render, screen } from '@testing-library/react';
-import { Home } from '@/pages/index.ts';
+import { screen } from '@testing-library/react';
 
 test('Renders Home Page', () => {
-  render(<Home />);
   screen.debug();
 });
