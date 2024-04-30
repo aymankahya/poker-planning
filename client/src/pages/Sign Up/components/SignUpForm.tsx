@@ -9,24 +9,36 @@ import { Link } from 'react-router-dom';
 
 const SignUpFormSchema = z
   .object({
-    username: z
+    firstName: z.string().min(3, { message: 'First name should be at least 3 characters long' }),
+    lastName: z.string().min(3, { message: 'Last name should be at least 3 characters long' }),
+    email: z.string().email({ message: 'Email should be a in a valid email format' }),
+    password: z
       .string()
-      .min(5, {
-        message: 'Username must be at least 5 characters long',
+      .min(8, {
+        message: 'Password must be at least 8 characters long',
       })
-      .includes('@', {
-        message: 'Must include @',
+      .regex(/^(?!.*?(.)\1\1)/, {
+        message: 'Password should not contain three or more consecutive identical characters',
+      })
+      .regex(/[a-z]/, {
+        message: 'Password should contain at least one lowercase letter',
+      })
+      .regex(/[A-Z]/, {
+        message: 'Password should contain at least one uppercase letter',
+      })
+      .regex(/\d/, {
+        message: 'Password should contain at least one digit character',
+      })
+      .regex(/[\W_]/, {
+        message: 'Password should contain at least one special character or underscore',
       }),
-    password: z.string().min(8, {
-      message: 'Password must be at least 8 characters long',
-    }),
     confirmPassword: z.string(),
   })
   .superRefine((value, ctx) => {
     if (value.confirmPassword !== value.password) {
       ctx.addIssue({
         code: 'custom',
-        message: 'Password confirmation must match the actual password',
+        message: 'Password confirmation does not match the provided password',
         path: ['confirmPassword'],
       });
     }
@@ -38,14 +50,27 @@ export default function SignUpForm() {
   const form = useForm<SignUpFormFields>({
     resolver: zodResolver(SignUpFormSchema),
     defaultValues: {
-      username: '',
+      firstName: '',
+      lastName: '',
+      email: '',
       password: '',
       confirmPassword: '',
     },
   });
 
-  const onSubmit: SubmitHandler<SignUpFormFields> = () => {
-    // Add sublit handling logic here
+  const onSubmit: SubmitHandler<SignUpFormFields> = async (data) => {
+    await fetch(`${import.meta.env.VITE_SERVER_URL}/sign-up`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        firstName: data.firstName,
+        lastName: data.lastName,
+        email: data.email,
+        password: data.password,
+      }),
+    });
   };
   return (
     <Card className="z-30 mx-5 md:m-0 md:w-[500px]">
@@ -56,7 +81,11 @@ export default function SignUpForm() {
       <CardContent>
         <Form {...form}>
           <form className="flex flex-col gap-5 " onSubmit={form.handleSubmit(onSubmit)}>
-            <FormField name="username" form={form} label="Username" placeholder="Choose a Username" />
+            <div className="flex gap-7">
+              <FormField name="firstName" form={form} label="First Name" placeholder="Enter your First Name" />
+              <FormField name="lastName" form={form} label="Last Name" placeholder="Enter your Last Name" />
+            </div>
+            <FormField name="email" form={form} label="Email" placeholder="Enter your email address" />
             <FormField name="password" form={form} label="Password" placeholder="Choose a Password" />
             <FormField
               name="confirmPassword"

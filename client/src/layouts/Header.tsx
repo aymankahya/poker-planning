@@ -4,7 +4,7 @@ import HamburgerMenu from '@/components/header/HamburgerMenu';
 import { Button } from '@/components/ui/button';
 import User from '@/components/header/User';
 import useAuth from '@/hooks/useAuth';
-import useScroll from '@/hooks/useSroll';
+import useScroll from '@/hooks/useScroll';
 import { Link } from 'react-router-dom';
 
 function Header() {

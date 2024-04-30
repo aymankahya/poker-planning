@@ -8,17 +8,8 @@ import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 
 const LoginFormSchema = z.object({
-  username: z
-    .string()
-    .min(5, {
-      message: 'Username must be at least 5 characters long',
-    })
-    .includes('@', {
-      message: 'Must include @',
-    }),
-  password: z.string().min(8, {
-    message: 'Password must be at least 8 characters long',
-  }),
+  email: z.string().email('Email entered is not a valid email'),
+  password: z.string(),
 });
 
 type LoginFormFields = z.infer<typeof LoginFormSchema>;
@@ -27,13 +18,19 @@ export default function LoginForm() {
   const form = useForm<LoginFormFields>({
     resolver: zodResolver(LoginFormSchema),
     defaultValues: {
-      username: '',
+      email: '',
       password: '',
     },
   });
 
-  const onSubmit: SubmitHandler<LoginFormFields> = () => {
-    // Add submit handling logic here
+  const onSubmit: SubmitHandler<LoginFormFields> = async (data) => {
+    await fetch('http://localhost:3000/login', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify({ email: data.email, password: data.password }),
+    });
   };
 
   return (
@@ -45,7 +42,7 @@ export default function LoginForm() {
       <CardContent>
         <Form {...form}>
           <form className="flex flex-col gap-5 " onSubmit={form.handleSubmit(onSubmit)}>
-            <FormField name="username" form={form} label="Username" placeholder="Enter your Username" />
+            <FormField name="email" form={form} label="Email" placeholder="Enter your Email" />
             <FormField name="password" form={form} label="Password" placeholder="Enter your Password" />
             <Button type="submit">Login</Button>
           </form>
