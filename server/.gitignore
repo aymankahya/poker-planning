@@ -59,3 +59,7 @@ typings/
 
 # next.js build output
 .next
+
+# keys
+rsa_key_prv.pem
+rsa_key_pub.pem
