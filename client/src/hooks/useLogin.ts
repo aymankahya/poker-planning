@@ -1,7 +1,6 @@
 import useAuth from '@/hooks/useAuth';
 import { LoginFormFields } from '@/pages/Login/components/LoginForm';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 type LoginError = {
   isError: boolean;
@@ -12,7 +11,6 @@ export default function useLogin() {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<LoginError | null>(null);
   const { setUser } = useAuth();
-  const navigate = useNavigate();
 
   const login = async (data: LoginFormFields) => {
     setError(null);
@@ -36,7 +34,7 @@ export default function useLogin() {
       setUser({ username: jsonRes.user.username });
       localStorage.setItem('user', JSON.stringify({ username: jsonRes.user.username }));
       // Redirect the user to homepage
-      navigate('/');
+      window.location.href = '/';
     }
 
     if (response.status === 401) {
