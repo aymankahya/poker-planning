@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
 import { hash } from 'bcryptjs';
-import { capitalize } from 'lodash';
 import { User } from '@/models/User';
 import issueToken from '@/utils/issueToken';
 
@@ -17,8 +16,8 @@ const signupController = async (req: Request, res: Response, next: NextFunction)
       if (err) return res.status(500).json({ sucess: false, error: 'Password hash creation failed' });
 
       const newUser = new User({
-        firstName: capitalize(req.body.firstName),
-        lastName: capitalize(req.body.lastName),
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
         email: req.body.email,
         password: hashedPassword,
       });
