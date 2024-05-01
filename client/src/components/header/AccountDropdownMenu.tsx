@@ -8,13 +8,15 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { useAuth } from '@/hooks';
+import useLogout from '@/hooks/useLogout';
 import dynamicIconImports from 'lucide-react/dynamicIconImports';
-import React from 'react';
+import React, { MouseEventHandler } from 'react';
 
 type AccountActionsInterface = {
   name: string;
   icon: keyof typeof dynamicIconImports;
   seperator: boolean;
+  onClick?: MouseEventHandler<HTMLDivElement>;
 };
 
 const accountActions: AccountActionsInterface[] = [
@@ -25,6 +27,8 @@ const accountActions: AccountActionsInterface[] = [
 
 export default function AccountDropdopwnMenu() {
   const { user } = useAuth();
+  const { logout } = useLogout();
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger tabIndex={0} className="cursor-pointer " asChild>
@@ -39,7 +43,11 @@ export default function AccountDropdopwnMenu() {
           return (
             <React.Fragment key={action.name}>
               {action.seperator && <DropdownMenuSeparator />}
-              <AccountDropdownItem action={action.name} iconName={action.icon} />
+              {action.name === 'Log out' ? (
+                <AccountDropdownItem action={action.name} iconName={action.icon} onClick={logout} />
+              ) : (
+                <AccountDropdownItem action={action.name} iconName={action.icon} />
+              )}
             </React.Fragment>
           );
         })}
