@@ -1,3 +1,4 @@
+import ProtectedRoute from '@/components/common/ProtectedRoute';
 import Layout from '@/layouts/Layout';
 import { Home } from '@/pages';
 import Login from '@/pages/Login/Login';
@@ -15,7 +16,11 @@ export const router = createBrowserRouter([
       },
       {
         path: pathConstants.ABOUT,
-        element: <h1>What is Poker Planning ?</h1>,
+        element: (
+          <ProtectedRoute>
+            <h1>What is Poker Planning ?</h1>
+          </ProtectedRoute>
+        ),
       },
       {
         path: pathConstants.FEATURES,
