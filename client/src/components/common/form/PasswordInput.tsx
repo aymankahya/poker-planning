@@ -17,9 +17,23 @@ const PasswordInput = React.forwardRef<HTMLInputElement, PasswordInputProps>(
         placeholder={placeholder}
         icon={
           showPass ? (
-            <EyeOff onClick={() => setShowPass((prev) => !prev)} className={styleIcon} />
+            <EyeOff
+              tabIndex={0}
+              role="button"
+              aria-label="Hide password"
+              onClick={() => setShowPass((prev) => !prev)}
+              onKeyDown={(e) => e.code === 'Enter' && setShowPass((prev) => !prev)}
+              className={styleIcon}
+            />
           ) : (
-            <Eye onClick={() => setShowPass((prev) => !prev)} className={styleIcon} />
+            <Eye
+              tabIndex={0}
+              role="button"
+              aria-label="Show password"
+              onClick={() => setShowPass((prev) => !prev)}
+              onKeyDown={(e) => e.code === 'Enter' && setShowPass((prev) => !prev)}
+              className={styleIcon}
+            />
           )
         }
         className={className}
