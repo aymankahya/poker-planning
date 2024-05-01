@@ -23,9 +23,12 @@ export default function useCheckAuth() {
 
       if (!response.ok) {
         setLoading(false);
+        setIsAuth(false);
         localStorage.removeItem('user');
         localStorage.removeItem('token');
-        return setIsAuth(false);
+        if (window.location.href === `${import.meta.env.VITE_CLIENT}/`) {
+          return window.location.reload();
+        }
       }
 
       setLoading(false);
