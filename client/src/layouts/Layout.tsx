@@ -1,6 +1,6 @@
 import Background from '@/components/common/Background';
 import { Toaster } from '@/components/ui/toaster';
-import Header from '@/layouts/Header';
+import Header from '@/components/header/Header';
 import { Outlet } from 'react-router-dom';
 
 export default function Layout() {

@@ -1,4 +1,4 @@
-import AccountDropdopwnMenu from '@/components/header/AccountDropdownMenu';
+import AccountDropdopwnMenu from '@/components/header/components/AccountDropdownMenu';
 import { useAuth } from '@/hooks';
 
 export default function User() {
