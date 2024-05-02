@@ -1,10 +1,8 @@
-import { cn } from '@/lib/utils';
-import Navigation from '@/components/header/Navigation';
-import HamburgerMenu from '@/components/header/HamburgerMenu';
+import { Navigation, HamburgerMenu, User } from '@/components/header/components';
 import { Button } from '@/components/ui/button';
-import User from '@/components/header/User';
 import { useScroll, useAuth } from '@/hooks/';
 import { Link } from 'react-router-dom';
+import { cn } from '@/lib/utils';
 
 function Header() {
   const { user } = useAuth();
