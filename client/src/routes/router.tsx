@@ -1,8 +1,6 @@
+import { Layout, SessionLayout } from '@/layouts';
+import { Home, Login, SignUp } from '@/pages';
 import ProtectedRoute from '@/components/common/ProtectedRoute';
-import Layout from '@/layouts/Layout';
-import { Home } from '@/pages';
-import Login from '@/pages/Login/Login';
-import SignUp from '@/pages/Sign Up/SignUp';
 import { pathConstants } from '@/routes/pathConstants';
 import { createBrowserRouter } from 'react-router-dom';
 
@@ -35,5 +33,9 @@ export const router = createBrowserRouter([
   {
     path: '/sign-up',
     element: <SignUp />,
+  },
+  {
+    path: '/session',
+    element: <SessionLayout />,
   },
 ]);

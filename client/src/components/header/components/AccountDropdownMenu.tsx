@@ -36,7 +36,7 @@ export default function AccountDropdopwnMenu() {
           <AvatarFallback>{user?.username[0]}</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="mt-1">
+      <DropdownMenuContent align="end" className="mt-1">
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
 
         {accountActions.map((action) => {
