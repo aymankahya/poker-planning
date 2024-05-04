@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { Command, CommandGroup, CommandItem, CommandList } from '@/components/ui/command';
+import { Command, CommandItem, CommandList } from '@/components/ui/command';
 import {
   FormField as UiFormField,
   FormControl,
@@ -61,7 +61,7 @@ export default function List<TFieldValues extends FieldValues = FieldValues>({
                       value={item}
                       key={item}
                       onSelect={() => {
-                        //@ts-ignore
+                        // @ts-expect-error => Unknown type error : setValue should accept item as value normally
                         form.setValue(name, item);
                         setOpen(false);
                       }}

@@ -35,7 +35,7 @@ export const router = createBrowserRouter([
     element: <SignUp />,
   },
   {
-    path: '/session',
+    path: '/session/:id',
     element: <SessionLayout />,
   },
 ]);
