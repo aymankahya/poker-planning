@@ -32,7 +32,9 @@ export default function CreateSessionForm() {
   const { isAuth } = useCheckAuth();
   const CreateSessionFormSchema = isAuth ? CreateSessionFormAuthUserSchema : CreateSessionFormGuestUserSchema;
 
-  type CreateSessionFormFields = z.infer<typeof CreateSessionFormSchema>;
+  type CreateSessionFormFields =
+    | z.infer<typeof CreateSessionFormAuthUserSchema>
+    | z.infer<typeof CreateSessionFormGuestUserSchema>;
 
   const defaultValues = isAuth
     ? {
