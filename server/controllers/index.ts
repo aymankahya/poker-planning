@@ -1,4 +1,6 @@
-export { default as loginController } from '@/controllers/loginController';
-export { default as signupController } from '@/controllers/signupController';
-export { default as authController } from '@/controllers/authController';
-export { default as logoutController } from '@/controllers/logoutController';
+export { default as loginController } from '@/controllers/authentication/loginController';
+export { default as signupController } from '@/controllers/authentication/signupController';
+export { default as authController } from '@/controllers/authentication/authController';
+export { default as logoutController } from '@/controllers/authentication/logoutController';
+export { default as createSessionController } from '@/controllers/session/createSessionController';
+export { default as getSessionData } from '@/controllers/session/getSessionData';

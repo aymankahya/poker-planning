@@ -12,7 +12,7 @@ const loginController = async (req: Request, res: Response, next: NextFunction) 
     const jwtToken = issueToken(user, '2d');
     return res.status(200).json({
       success: true,
-      user: { username: user.username },
+      user: { id: user._id, username: user.username },
       token: jwtToken,
     });
   } catch (err) {
