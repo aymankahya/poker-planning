@@ -35,6 +35,7 @@ module.exports = {
     'react/require-default-props': 'off',
     'react/prop-types': 'off',
     'react-refresh/only-export-components': 'off',
+    'no-nested-ternary': 'off',
   },
   settings: {
     'import/resolver': {
