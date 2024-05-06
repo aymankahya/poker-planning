@@ -27,7 +27,7 @@ const signupController = async (req: Request, res: Response, next: NextFunction)
 
       return res.status(200).json({
         success: true,
-        username: newUser.username,
+        user: { username: newUser.username, id: newUser._id },
         token: jwtToken,
         msg: 'User created successfully',
       });
