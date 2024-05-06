@@ -1,51 +1,42 @@
-import CheckBoxFormField from '@/components/common/form/CheckBoxFormField';
-import FormField from '@/components/common/form/FormField';
-import ListFormField from '@/components/common/form/ListFormField';
+import { ListFormField, FormField, CheckBoxFormField } from '@/components/common/form/';
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
-
-import useCheckAuth from '@/hooks/useCheckAuth';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { useAuth, useCreateSession } from '@/hooks';
 import { z } from 'zod';
-
-const VOTING_SYSTEM = [
-  'Fibonacci (0, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89)',
-  'Short Fibonacci (0, ½, 1, 2, 3, 5, 8, 13, 20, 40, 100)',
-  'T-Shirt (XXS, XS, S, M, L, XL, XXL)',
-];
+import { VOTING_SYSTEM } from '@/utils/constants/VOTING_SYSTEM';
 
 const CreateSessionFormGuestUserSchema = z.object({
   guestName: z.string().min(3, { message: 'Player name must be at least 3 characters long' }),
   sessionName: z.string().min(3, { message: 'Session name must be at least 3 characters long' }),
-  voteSystem: z.string({ required_error: 'You must choose a voting system' }),
+  voteSystem: z.number({ required_error: 'You must choose a voting system' }),
   adminAll: z.boolean().optional(),
 });
 
 const CreateSessionFormAuthUserSchema = z.object({
   sessionName: z.string().min(3, { message: 'Session name must be at least 3 characters long' }),
-  voteSystem: z.string({ required_error: 'You must choose a voting system' }),
+  voteSystem: z.number({ required_error: 'You must choose a voting system' }),
   adminAll: z.boolean().optional(),
 });
 
-export default function CreateSessionForm() {
-  const { isAuth } = useCheckAuth();
-  const CreateSessionFormSchema = isAuth ? CreateSessionFormAuthUserSchema : CreateSessionFormGuestUserSchema;
+type CreateSessionFormFields =
+  | z.infer<typeof CreateSessionFormAuthUserSchema>
+  | z.infer<typeof CreateSessionFormGuestUserSchema>;
 
-  type CreateSessionFormFields =
-    | z.infer<typeof CreateSessionFormAuthUserSchema>
-    | z.infer<typeof CreateSessionFormGuestUserSchema>;
+export default function CreateSessionForm() {
+  const { createSession, loading } = useCreateSession();
+  const { user, isAuth } = useAuth();
+  const CreateSessionFormSchema = isAuth ? CreateSessionFormAuthUserSchema : CreateSessionFormGuestUserSchema;
 
   const defaultValues = isAuth
     ? {
         sessionName: '',
-        voteSystem: '',
         adminAll: false,
       }
     : {
         guestName: '',
         sessionName: '',
-        voteSystem: '',
         adminAll: false,
       };
 
@@ -55,7 +46,9 @@ export default function CreateSessionForm() {
     defaultValues: defaultValues,
   });
 
-  const onSubmit: SubmitHandler<CreateSessionFormFields> = () => {};
+  const onSubmit: SubmitHandler<CreateSessionFormFields> = (data) => {
+    createSession({ ...data, id: user?.id });
+  };
 
   return (
     <Form {...form}>
@@ -71,7 +64,7 @@ export default function CreateSessionForm() {
         />
         <CheckBoxFormField name="adminAll" form={form} label="Allow members to manage session" className="mt-5" />
 
-        <Button type="submit" className="w-fit self-end">
+        <Button type="submit" disabled={loading} className="w-fit self-end">
           Create Session
         </Button>
       </form>

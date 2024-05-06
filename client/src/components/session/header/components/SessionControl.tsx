@@ -6,6 +6,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import useSession from '@/hooks/useSession';
 
 import { ChevronDown, Home, LucideProps, Settings } from 'lucide-react';
 import React from 'react';
@@ -16,11 +17,12 @@ const sessionControls = [
 ];
 
 export default function SessionControl() {
+  const { session } = useSession();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild className="group flex items-center gap-2">
         <Button variant="ghost" className="text-xl text-black font-bold hover:text-black hover:bg-slate-100">
-          Session name
+          {session?.sessionName}
           <ChevronDown className="w-5 h-5 transition duration-200 group-data-[state=open]:rotate-180" />
         </Button>
       </DropdownMenuTrigger>

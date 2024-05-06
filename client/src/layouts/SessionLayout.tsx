@@ -1,16 +1,15 @@
-import SessionHeader from '@/components/session/header/SessionHeader';
-import Room from '@/components/session/room/Room';
-import VotePanel from '@/components/session/vote/VotePanel';
-import IssueBarProvider from '@/context/IssueBarProvider';
+import SessionProvider from '@/context/SessionProvider';
+import useSession from '@/hooks/useSession';
+import Session from '@/pages/Session';
+import { cx } from 'class-variance-authority';
 
 export default function SessionLayout() {
+  const { dataLoading } = useSession();
   return (
-    <div className="flex flex-col w-screen h-dvh">
-      <IssueBarProvider>
-        <SessionHeader />
-        <Room />
-        <VotePanel />
-      </IssueBarProvider>
+    <div className={cx('flex flex-col w-screen h-dvh', { 'justify-center': dataLoading })}>
+      <SessionProvider>
+        <Session />
+      </SessionProvider>
     </div>
   );
 }
