@@ -1,4 +1,4 @@
-import { PasswordInput } from '@/components/common/form/PasswordInput';
+import PasswordInput from '@/components/common/form/PasswordInput';
 import {
   FormField as UiFormField,
   FormControl,
