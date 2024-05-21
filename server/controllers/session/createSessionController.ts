@@ -1,22 +1,25 @@
 import { Request, Response, NextFunction } from 'express-serve-static-core';
 import { Session } from '@/models/Session';
 import { IUser, User } from '@/models/User';
+import { IGuest, Guest } from '@/models/Guest';
 
 const createSessionController = async (req: Request, res: Response, next: NextFunction) => {
-  // Find User document in database if already signed in
-
-  let user: IUser | null = null;
-  if (req.body.id) {
-    user = await User.findOne({ _id: req.body.id }).exec();
-  }
-  // // Create a new Room instance in the database
-
   try {
+    let user: IUser | null = null;
+    let guest: IGuest | null = null;
+    if (req.body.id) {
+      user = await User.findOne({ _id: req.body.id }).exec();
+    } else if (req.body.guestId) {
+      guest = await Guest.findOne({ _id: req.body.guestId }).exec();
+    } else {
+      return res.status(400).json({ error: 'Missing ID in body' });
+    }
+
     const session = new Session({
       sessionName: req.body.sessionName,
       players: user ? [user?._id] : [],
-      guests: !user ? [req.body.guestName] : [],
-      admin: user ? [user] : [req.body.guestName],
+      guests: !user ? [guest] : [],
+      admin: user ? [user] : [guest?._id],
       adminAll: req.body.adminAll,
       votingSystem: req.body.voteSystem,
     });

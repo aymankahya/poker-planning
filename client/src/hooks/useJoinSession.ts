@@ -1,17 +1,17 @@
 import { useToast } from '@/components/ui/use-toast';
 import useLoginGuest from '@/hooks/useLoginGuest';
-import { CreateSessionFormFields } from '@/types';
+import { JoinSessionFormFields } from '@/types';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export default function useCreateSession() {
-  const navigate = useNavigate();
+export default function useJoinSession() {
   const { toast } = useToast();
+  const navigate = useNavigate();
   const { loginGuest } = useLoginGuest();
   const [loading, setLoading] = useState<boolean>(false);
 
-  const createSession = async (
-    data: CreateSessionFormFields & { id: number | undefined } & { guestId?: number | undefined },
+  const joinSession = async (
+    data: JoinSessionFormFields & { id: number | undefined } & { guestId?: number | undefined },
   ) => {
     try {
       setLoading(true);
@@ -21,7 +21,7 @@ export default function useCreateSession() {
         sessionData = { ...data, guestId: await guestId };
       }
 
-      const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/create-session`, {
+      const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/join-session`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -33,17 +33,15 @@ export default function useCreateSession() {
         toast({
           variant: 'destructive',
           title: 'Uh oh! Something went wrong.',
-          description: 'There was a problem when joining session.',
+          description: 'There was a problem when joining session',
         });
-        setLoading(false);
+        return setLoading(false);
       }
 
-      const dataRes = await response.json();
-
       setLoading(false);
-      navigate(`session/${dataRes.sessionId}`);
+      return navigate(`session/${data.sessionId}`);
     } catch (err) {
-      toast({
+      return toast({
         variant: 'destructive',
         title: 'Uh oh! Something went wrong.',
         description: 'There was a problem when creating session.',
@@ -51,5 +49,5 @@ export default function useCreateSession() {
     }
   };
 
-  return { createSession, loading };
+  return { joinSession, loading };
 }

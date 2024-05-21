@@ -2,7 +2,7 @@ import Player from '@/components/session/player/Player';
 import RoomTable from '@/components/session/room/components/RoomTable';
 import useIssueBar from '@/hooks/useIssueBar';
 import useSession from '@/hooks/useSession';
-import { splitPlayers } from '@/utils/splitPlayers';
+import { splitPlayers } from '@/utils';
 import { cx } from 'class-variance-authority';
 
 export default function Room() {
@@ -17,37 +17,19 @@ export default function Room() {
         {/* Left Side */}
         <div className="flex flex-col items-center w-full row-span-4 justify-self-end self-center">
           {players?.left.map((player) => {
-            return (
-              <Player
-                key={typeof player === 'string' ? player : player?.username}
-                name={typeof player === 'string' ? player : player?.username}
-                side="top"
-              />
-            );
+            return <Player key={player.id} playerInfo={player} side="top" />;
           })}
         </div>
         {/* Top Side */}
         <div className="flex items-start justify-center gap-10 w-full col-span-1 row-span-1 justify-self-center h-[100px]">
           {players?.top.map((player) => {
-            return (
-              <Player
-                key={typeof player === 'string' ? player : player?.username}
-                name={typeof player === 'string' ? player : player?.username}
-                side="top"
-              />
-            );
+            return <Player key={player.id} playerInfo={player} side="top" />;
           })}
         </div>
         {/* Right Side */}
         <div className="row-span-3 self-center flex flex-col gap-4">
           {players?.right.map((player) => {
-            return (
-              <Player
-                key={typeof player === 'string' ? player : player?.username}
-                name={typeof player === 'string' ? player : player?.username}
-                side="top"
-              />
-            );
+            return <Player key={player.id} playerInfo={player} side="top" />;
           })}
         </div>
         <RoomTable />
@@ -61,13 +43,7 @@ export default function Room() {
           )}
         >
           {players?.bottom.map((player) => {
-            return (
-              <Player
-                key={typeof player === 'string' ? player : player?.username}
-                name={typeof player === 'string' ? player : player?.username}
-                side="bottom"
-              />
-            );
+            return <Player key={player.id} playerInfo={player} side="bottom" />;
           })}
         </div>
       </div>

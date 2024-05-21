@@ -8,6 +8,7 @@ const getSessionData = async (req: Request, res: Response) => {
 
     const session = await Session.findById(req.query.id)
       .populate({ path: 'players', model: 'User' })
+      .populate({ path: 'guests', model: 'Guest' })
       .populate('issues')
       .exec();
 
@@ -15,10 +16,15 @@ const getSessionData = async (req: Request, res: Response) => {
 
     return res.status(200).json({
       sessionName: session?.sessionName,
-      // @ts-expect-error => Typescript doesn't recognize populated fields type
-      players: session?.toObject().players.map((player) => player.username),
+      players: session?.toObject().players.map((player) => {
+        // @ts-expect-error => Typescript doesn't recognize populated fields type
+        return { id: player._id, username: player.username };
+      }),
       issues: session?.issues,
-      guests: session?.guests,
+      guests: session?.toObject().guests.map((guest) => {
+        // @ts-expect-error => Typescript doesn't recognize populated fields type
+        return { id: guest._id, username: guest.guestName };
+      }),
       admin: session?.admin.map((admin) => {
         if (typeof admin === 'string') {
           return admin;
