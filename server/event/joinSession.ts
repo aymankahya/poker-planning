@@ -1,16 +1,15 @@
 import { Socket } from 'socket.io';
 import { Session } from '@/models/Session';
 
-const createSession = async (roomId: string, socket: Socket) => {
+const joinSession = async (roomId: string, socket: Socket) => {
   try {
     const session = await Session.findById(roomId);
     if (!session) socket.emit('error-joining-session');
     await socket.join(roomId);
-    socket.emit('session-joined');
+    socket.broadcast.to(roomId).emit('update-session');
   } catch (err) {
-    await Session.deleteMany({ _id: roomId });
     socket.emit('error-joining-session');
   }
 };
 
-export default createSession;
+export default joinSession;

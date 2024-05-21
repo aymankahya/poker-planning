@@ -1,5 +1,6 @@
 import { useToast } from '@/components/ui/use-toast';
 import { Session } from '@/types';
+import { getRoomIDFromUrl } from '@/utils';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -14,10 +15,7 @@ export default function useGetSessionData() {
   useEffect(() => {
     const getSessionData = async () => {
       const response = await fetch(
-        `${import.meta.env.VITE_SERVER_URL}/session-data?id=${location.pathname
-          .split('/')
-          .filter((part) => part !== '')
-          .at(1)}`,
+        `${import.meta.env.VITE_SERVER_URL}/session-data?id=${getRoomIDFromUrl(location.pathname)}`,
         {
           method: 'GET',
         },
@@ -39,7 +37,6 @@ export default function useGetSessionData() {
       }
 
       const data = await response.json();
-
       setSession({ ...data, votingState: 'idle' });
       return setDataLoading(false);
     };
