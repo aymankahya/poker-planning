@@ -3,15 +3,22 @@ import fs from 'fs';
 import path from 'path';
 import { InferSchemaType, Document } from 'mongoose';
 import { UserSchema } from '@/models/User';
+import { GuestSchema } from '@/models/Guest';
 
 type User = InferSchemaType<typeof UserSchema>;
+type Guest = InferSchemaType<typeof GuestSchema>;
 
 const PRIVATE_KEY = fs.readFileSync(path.join(__dirname, '..', 'rsa_key_prv.pem'), 'utf-8');
 
-const issueToken = (user: User & Document, validityDuration: string | number | undefined) => {
+const issueToken = (
+  user: (User & Document) | (Guest & Document),
+  userRole: 'user' | 'guest',
+  validityDuration: string | number | undefined,
+) => {
   const id = user._id;
   const payload = {
     sub: id,
+    role: userRole,
     iat: Math.floor(Date.now() / 1000),
   };
 
@@ -20,7 +27,7 @@ const issueToken = (user: User & Document, validityDuration: string | number | u
     algorithm: 'RS256',
   });
 
-  return `Bearer ${signedToken}`;
+  return { token: `Bearer ${signedToken}`, role: userRole };
 };
 
 export default issueToken;
