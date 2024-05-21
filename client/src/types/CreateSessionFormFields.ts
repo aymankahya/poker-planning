@@ -14,5 +14,5 @@ const CreateSessionFormAuthUserSchema = z.object({
 });
 
 export type CreateSessionFormFields =
-  | z.infer<typeof CreateSessionFormAuthUserSchema>
-  | z.infer<typeof CreateSessionFormGuestUserSchema>;
+  | z.infer<typeof CreateSessionFormGuestUserSchema>
+  | z.infer<typeof CreateSessionFormAuthUserSchema>;

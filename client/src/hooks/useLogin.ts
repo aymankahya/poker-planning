@@ -31,7 +31,7 @@ export default function useLogin() {
       localStorage.setItem('token', jsonRes.token);
       // Store the active user in context
 
-      setUser({ username: jsonRes.user.username, id: jsonRes.user.id });
+      setUser({ username: jsonRes.user.username, id: jsonRes.user.id, role: jsonRes.user.role });
       localStorage.setItem('user', JSON.stringify({ id: jsonRes.user.id, username: jsonRes.user.username }));
       // Redirect the user to homepage
       window.location.href = '/';

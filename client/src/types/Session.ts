@@ -7,7 +7,7 @@ export type Session = {
   votingState: string; // To be replaced later with enum of possible states
   issues: Issue[];
   players: User[];
-  guests: string[];
+  guests: User[];
   admin: (string | User)[];
   settings: SessionSetting;
 };

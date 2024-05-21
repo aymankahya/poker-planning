@@ -1,7 +1,7 @@
-import { User } from '@/context/SessionProvider';
+import { User } from '@/types';
 
-export const splitPlayers = (players: (string | User)[]) => {
-  const playerSplit: { [key: string]: (string | User)[] } = { top: [], bottom: [], left: [], right: [] };
+const splitPlayers = (players: User[]) => {
+  const playerSplit: { [key: string]: User[] } = { top: [], bottom: [], left: [], right: [] };
   let lastSplit = '';
 
   players.map((player, index) => {
@@ -21,3 +21,5 @@ export const splitPlayers = (players: (string | User)[]) => {
 
   return playerSplit;
 };
+
+export default splitPlayers;
