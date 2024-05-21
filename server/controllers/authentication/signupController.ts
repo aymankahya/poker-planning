@@ -23,12 +23,12 @@ const signupController = async (req: Request, res: Response, next: NextFunction)
       });
 
       await newUser.save();
-      const jwtToken = issueToken(newUser, '2d');
+      const jwtToken = issueToken(newUser, 'user', '2d');
 
       return res.status(200).json({
         success: true,
-        user: { username: newUser.username, id: newUser._id },
-        token: jwtToken,
+        user: { username: newUser.username, id: newUser._id, role: jwtToken.role },
+        token: jwtToken.token,
         msg: 'User created successfully',
       });
     });
