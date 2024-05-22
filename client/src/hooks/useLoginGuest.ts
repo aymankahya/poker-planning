@@ -24,7 +24,7 @@ export default function useLoginGuest() {
       const jsonRes = await response.json();
 
       localStorage.setItem('token', jsonRes.token);
-      localStorage.setItem('user', JSON.stringify({ id: jsonRes.id, username: jsonRes.username }));
+      localStorage.setItem('user', JSON.stringify({ id: jsonRes.id, username: jsonRes.username, role: 'guest' }));
       setUser({ username: jsonRes.username, id: jsonRes.id, role: 'guest' });
       return jsonRes.id;
     } catch (err) {
