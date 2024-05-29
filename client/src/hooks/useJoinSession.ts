@@ -39,7 +39,8 @@ export default function useJoinSession() {
       }
 
       setLoading(false);
-      return navigate(`session/${data.sessionId}`);
+
+      return navigate(`/session/${data.sessionId}`);
     } catch (err) {
       return toast({
         variant: 'destructive',
