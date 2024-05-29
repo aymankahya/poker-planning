@@ -10,7 +10,6 @@ export const SessionContext = createContext<SessionContextType>({
 
 export default function SessionProvider({ children }: PropsWithChildren) {
   const { session, setSession, dataLoading } = useGetSessionData();
-
   const sessionProviderValue = useMemo(() => {
     return { session, setSession, dataLoading };
   }, [session, dataLoading, setSession]);

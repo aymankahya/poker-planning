@@ -1,4 +1,5 @@
 import { useToast } from '@/components/ui/use-toast';
+import useJoinSessionFromUrl from '@/hooks/useJoinSessionFromUrl';
 import { Session } from '@/types';
 import { getRoomIDFromUrl } from '@/utils';
 import { useEffect, useState } from 'react';
@@ -9,8 +10,9 @@ export default function useGetSessionData() {
   const navigate = useNavigate();
   const [session, setSession] = useState<Session | null>(null);
   const [dataLoading, setDataLoading] = useState<boolean>(true);
-
   const location = useLocation();
+  const { joinSessionFromUrl } = useJoinSessionFromUrl();
+  const user = JSON.parse(localStorage.getItem('user') ?? 'null');
 
   useEffect(() => {
     const getSessionData = async () => {
@@ -36,13 +38,35 @@ export default function useGetSessionData() {
         });
       }
 
-      const data = await response.json();
-      setSession({ ...data, votingState: 'idle' });
-      return setDataLoading(false);
+      const data: Session = await response.json();
+      // Handle accessing the session directly from URL
+      if (!user) {
+        window.location.href = '/';
+      }
+      if (
+        data.players.some((player) => player.id === user?.id.toString()) ||
+        data.guests.some((guest) => guest.id === user?.id.toString())
+      ) {
+        setSession({ ...data });
+        setDataLoading(false);
+      }
+      if (user?.role === 'guest') {
+        await joinSessionFromUrl({
+          sessionId: getRoomIDFromUrl(location.pathname) ?? '',
+          guestId: user?.id.toString(),
+        });
+        getSessionData();
+      }
+      if (user.role === 'user') {
+        await joinSessionFromUrl({ sessionId: getRoomIDFromUrl(location.pathname) ?? '', id: user?.id.toString() });
+        getSessionData();
+      }
+
+      return null;
     };
 
     getSessionData();
-  }, [location.pathname, navigate, toast]);
+  }, [location.pathname, user, joinSessionFromUrl, navigate, toast]);
 
   return { session, setSession, dataLoading };
 }
