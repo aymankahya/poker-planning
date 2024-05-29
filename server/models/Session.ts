@@ -8,6 +8,11 @@ export const SessionSchema = new Schema({
   admin: [{ type: Schema.Types.Mixed, required: true }],
   adminAll: { type: Boolean, required: true },
   votingSystem: { type: Number, required: true },
+  currentVotes: {
+    type: Map,
+    of: String,
+  },
+  votingState: { type: String, required: true, enum: ['notStarted', 'inProgress', 'completed'], default: 'notStarted' },
 });
 
 export const Session = model('Session', SessionSchema);
