@@ -25,6 +25,8 @@ export default function RoomTable() {
     tableState = 'waiting';
   } else if (!hasVoted) {
     tableState = 'pick';
+  } else if (voteDone && !isAdmin) {
+    tableState = 'waitingNewVote';
   } else if (voteDone) {
     tableState = 'newVote';
   }
@@ -40,6 +42,7 @@ export default function RoomTable() {
         Reveal cards
       </Button>
     ),
+    waitingNewVote: <p>Waiting for new vote</p>,
     newVote: (
       <Button
         onClick={() => socket?.emit('start-new-vote', getRoomIDFromUrl(location.pathname))}

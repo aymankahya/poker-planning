@@ -2,7 +2,7 @@ import { useToast } from '@/components/ui/use-toast';
 import useJoinSessionFromUrl from '@/hooks/useJoinSessionFromUrl';
 import { Session } from '@/types';
 import { getRoomIDFromUrl } from '@/utils';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 export default function useGetSessionData() {
@@ -12,7 +12,7 @@ export default function useGetSessionData() {
   const [dataLoading, setDataLoading] = useState<boolean>(true);
   const location = useLocation();
   const { joinSessionFromUrl } = useJoinSessionFromUrl();
-  const user = JSON.parse(localStorage.getItem('user') ?? 'null');
+  const user = useMemo(() => JSON.parse(localStorage.getItem('user') ?? 'null'), [localStorage.getItem('user')]);
 
   useEffect(() => {
     const getSessionData = async () => {
@@ -42,22 +42,19 @@ export default function useGetSessionData() {
       // Handle accessing the session directly from URL
       if (!user) {
         window.location.href = '/';
-      }
-      if (
+      } else if (
         data.players.some((player) => player.id === user?.id.toString()) ||
         data.guests.some((guest) => guest.id === user?.id.toString())
       ) {
         setSession({ ...data });
         setDataLoading(false);
-      }
-      if (user?.role === 'guest') {
+      } else if (user?.role === 'guest') {
         await joinSessionFromUrl({
           sessionId: getRoomIDFromUrl(location.pathname) ?? '',
           guestId: user?.id.toString(),
         });
         getSessionData();
-      }
-      if (user.role === 'user') {
+      } else if (user.role === 'user') {
         await joinSessionFromUrl({ sessionId: getRoomIDFromUrl(location.pathname) ?? '', id: user?.id.toString() });
         getSessionData();
       }
@@ -66,7 +63,7 @@ export default function useGetSessionData() {
     };
 
     getSessionData();
-  }, [location.pathname, user, joinSessionFromUrl, navigate, toast]);
+  }, []);
 
   return { session, setSession, dataLoading };
 }
