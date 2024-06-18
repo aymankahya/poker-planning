@@ -11,4 +11,5 @@ export type Session = {
   admin: (string | User)[];
   settings: SessionSetting;
   currentVotes: { [key: string]: string };
+  activeIssue: string;
 };
