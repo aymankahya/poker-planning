@@ -1,6 +1,6 @@
 export type Issue = {
+  id: string;
+  type: string;
   title: string;
-  description: string;
-  estimatedPoints: number;
-  votingActive: boolean;
+  estimatedPoints: string;
 };

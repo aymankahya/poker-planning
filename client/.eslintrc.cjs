@@ -37,6 +37,7 @@ module.exports = {
     'react-refresh/only-export-components': 'off',
     'no-nested-ternary': 'off',
     'react-hooks/exhaustive-deps': 'off',
+    'no-param-reassign': ['error', { props: false }],
   },
   settings: {
     'import/resolver': {

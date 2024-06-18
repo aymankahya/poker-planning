@@ -31,6 +31,11 @@ export default function RoomTable() {
     tableState = 'newVote';
   }
 
+  // console.log('hasVoted: ', hasVoted);
+  // console.log('allVoted: ', allVoted);
+  // console.log('isAdmin: ', isAdmin);
+  // console.log('voteDone: ', voteDone);
+
   const tableContent: { [key: string]: ReactNode } = {
     waiting: <p>Waiting for other player&apos;s votes...</p>,
     pick: <p>Pick your card !</p>,

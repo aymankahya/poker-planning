@@ -6,9 +6,12 @@ export default function SessionInfo() {
   return (
     <div className="flex flex-col items-start justify-center h-[4rem]">
       <SessionControl />
-      {session?.votingState === 'inProgress' && (
+      {(session?.votingState === 'inProgress' || session?.activeIssue !== '') && (
         <span aria-live="polite" className="text-slate-500 ml-[16px]">
-          Voting : <span className="font-bold italic">Name</span>{' '}
+          {session?.activeIssue ? 'Voting In Progress : ' : 'Voting In Progress'}
+          <span className="font-bold italic">
+            {session?.issues.find((issue) => issue.id === session.activeIssue)?.title}
+          </span>{' '}
         </span>
       )}
     </div>
