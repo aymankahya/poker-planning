@@ -1,5 +1,17 @@
 import { io } from '@/app';
-import { createSession, joinSession, leaveSession, revealCards, startNewVote, submitVote } from '@/event';
+import {
+  createSession,
+  joinSession,
+  leaveSession,
+  revealCards,
+  startNewVote,
+  submitVote,
+  updateAllClientSession,
+  setActiveIssue,
+  setEstimatedPoint,
+  deleteIssue,
+  editIssue,
+} from '@/event';
 
 const setupSessionSocket = () => {
   const sessionNamespace = io.of('/session');
@@ -26,6 +38,25 @@ const setupSessionSocket = () => {
 
     // Handling starting new vote event
     socket.on('start-new-vote', (roomId) => startNewVote(roomId, socket));
+
+    // Handling updating all clients session event
+    socket.on('update-all-session', (roomId) => updateAllClientSession(roomId));
+
+    // Handling setting active issue event
+    socket.on('set-active-issue', (roomId, issueId) => setActiveIssue(roomId, issueId, socket));
+
+    // Handling setting new estimated points event
+    socket.on('set-estimated-points', (roomId, issueId, newEstimatedPoints) =>
+      setEstimatedPoint(roomId, issueId, newEstimatedPoints, socket),
+    );
+
+    // Handling deleting issue event
+    socket.on('delete-issue', (roomId, issueId) => deleteIssue(roomId, issueId, socket));
+
+    // Handling editing issue event
+    socket.on('edit-issue', (roomId, issueId, newTitleValue, newTypeValue) =>
+      editIssue(roomId, issueId, newTitleValue, newTypeValue, socket),
+    );
 
     // Handling user disconnecting from session
     socket.on('disconnect', () => {

@@ -13,7 +13,10 @@ const getSessionData = async (roomId: string) => {
       // @ts-expect-error => Typescript doesn't recognize populated fields type
       return { id: player._id, username: player.username };
     }),
-    issues: session?.issues,
+    issues: session?.toObject().issues.map((issue) => {
+      // @ts-expect-error => Typescript doesn't recognize populated fields type
+      return { id: issue._id, type: issue.type, title: issue.title, estimatedPoints: issue.estimatedPoints };
+    }),
     guests: session?.toObject().guests.map((guest) => {
       // @ts-expect-error => Typescript doesn't recognize populated fields type
       return { id: guest._id, username: guest.guestName };
@@ -27,6 +30,7 @@ const getSessionData = async (roomId: string) => {
     settings: { adminAll: session?.adminAll, votingSystem: session?.votingSystem },
     currentVotes: session?.currentVotes,
     votingState: session?.votingState,
+    activeIssue: session?.activeIssue,
   };
 };
 
