@@ -13,6 +13,7 @@ export const SessionSchema = new Schema({
     of: String,
   },
   votingState: { type: String, required: true, enum: ['notStarted', 'inProgress', 'completed'], default: 'notStarted' },
+  activeIssue: { type: Schema.Types.Mixed, required: true },
 });
 
 export const Session = model('Session', SessionSchema);
