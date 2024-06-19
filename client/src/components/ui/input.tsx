@@ -8,7 +8,7 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(({ className, icon, type, ...props }, ref) => {
   return (
-    <div className="flex items-center gap-3">
+    <div className="flex w-full items-center gap-3">
       <input
         type={type}
         className={cn(
