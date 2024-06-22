@@ -71,7 +71,13 @@ export default function CreateSessionForm() {
       <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-2">
         {!isAuth && <FormField name="guestName" form={form} label="Display name" placeholder="Choose a display name" />}
         <FormField name="sessionName" form={form} label="Session name" placeholder="Choose a name for this session" />
-
+        {/* <ListFormField
+          name="voteSystem"
+          form={form}
+          label="Voting system"
+          placeholder="Choose a voting system"
+          list={getVotingSystemLabels(votingSystemMap)}
+        /> */}
         <VotingSystemListField
           name="voteSystem"
           form={form}

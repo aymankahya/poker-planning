@@ -2,7 +2,6 @@ import { Button } from '@/components/ui/button';
 import { Command, CommandItem, CommandList } from '@/components/ui/command';
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { useAuth } from '@/hooks';
 import useNestedModalsUI from '@/hooks/useNestedModalsUI';
 import useSettings from '@/hooks/useSettings';
 import getVotingSystem from '@/utils/getVotingSystem';
@@ -30,7 +29,6 @@ export default function VotingSystemListField<TFieldValues extends FieldValues =
 }: ListFormFieldProps<TFieldValues>) {
   const [open, setOpen] = useState<boolean>(false);
   const { settings } = useSettings();
-  const { user } = useAuth();
   const { hidden, setOpenCustomVoting, setHidden } = useNestedModalsUI();
   const votingSystemMap = getVotingSystem(settings?.customVotingSystem ?? []);
   return (
@@ -66,17 +64,15 @@ export default function VotingSystemListField<TFieldValues extends FieldValues =
                       </CommandItem>
                     );
                   })}
-                  {user?.role === 'user' && (
-                    <CommandItem
-                      className="font-bold cursor-pointer"
-                      onSelect={() => {
-                        setOpenCustomVoting(true);
-                        setHidden(true);
-                      }}
-                    >
-                      Create Custom Voting System
-                    </CommandItem>
-                  )}
+                  <CommandItem
+                    className="font-bold cursor-pointer"
+                    onSelect={() => {
+                      setOpenCustomVoting(true);
+                      setHidden(true);
+                    }}
+                  >
+                    Create Custom Voting System
+                  </CommandItem>
                 </CommandList>
               </Command>
             </PopoverContent>
