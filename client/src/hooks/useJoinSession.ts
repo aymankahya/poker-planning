@@ -11,7 +11,7 @@ export default function useJoinSession() {
   const [loading, setLoading] = useState<boolean>(false);
 
   const joinSession = async (
-    data: JoinSessionFormFields & { id?: number | undefined } & { guestId?: number | undefined },
+    data: JoinSessionFormFields & { id: number | undefined } & { guestId?: number | undefined },
   ) => {
     try {
       setLoading(true);
