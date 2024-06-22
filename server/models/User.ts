@@ -1,16 +1,7 @@
-import { Schema, model, Types } from 'mongoose';
+import { Schema, model } from 'mongoose';
 import { capitalize } from 'lodash';
 
-export interface IUser extends Document {
-  _id: Types.ObjectId;
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-  username: string;
-}
-
-export const UserSchema = new Schema<IUser>(
+export const UserSchema = new Schema(
   {
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
@@ -18,13 +9,21 @@ export const UserSchema = new Schema<IUser>(
     password: { type: String, required: true },
   },
   {
-    toJSON: { virtuals: true },
-    toObject: { virtuals: true },
+    virtuals: {
+      username: {
+        get() {
+          return `${capitalize(this.firstName)} ${capitalize(this.lastName)}`;
+        },
+      },
+    },
   },
 );
 
-UserSchema.virtual('username').get(function getVirtual() {
-  return `${capitalize(this.firstName)} ${capitalize(this.lastName)}`;
-});
+//= ===========================================================================================================//
+// Creating virtuals this way poses a typing issue when trying to get the virtual value later in controllers
+//= ===========================================================================================================//
+// UserSchema.virtual("username").get(function () {
+//   return `${capitalize(this.firstName)} ${capitalize(this.lastName)}`;
+// });
 
 export const User = model('User', UserSchema);
