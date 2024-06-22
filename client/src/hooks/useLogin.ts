@@ -1,4 +1,5 @@
 import useAuth from '@/hooks/useAuth';
+import useSettings from '@/hooks/useSettings';
 import { LoginFormFields } from '@/pages/Login/components/LoginForm';
 import { useState } from 'react';
 
@@ -11,6 +12,7 @@ export default function useLogin() {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<LoginError | null>(null);
   const { setUser } = useAuth();
+  const { setSettings } = useSettings();
 
   const login = async (data: LoginFormFields) => {
     setError(null);
@@ -31,8 +33,13 @@ export default function useLogin() {
       localStorage.setItem('token', jsonRes.token);
       // Store the active user in context
 
-      setUser({ username: jsonRes.user.username });
-      localStorage.setItem('user', JSON.stringify({ username: jsonRes.user.username }));
+      setUser({ username: jsonRes.user.username, id: jsonRes.user.id, role: jsonRes.user.role });
+      localStorage.setItem(
+        'user',
+        JSON.stringify({ id: jsonRes.user.id, username: jsonRes.user.username, role: 'user' }),
+      );
+      setSettings(jsonRes.user.settings);
+      localStorage.setItem('settings', JSON.stringify(jsonRes.user.settings));
       // Redirect the user to homepage
       window.location.href = '/';
     }

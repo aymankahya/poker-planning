@@ -1,4 +1,4 @@
-import { PasswordInput } from '@/components/common/form/PasswordInput';
+import PasswordInput from '@/components/common/form/PasswordInput';
 import {
   FormField as UiFormField,
   FormControl,
@@ -14,7 +14,7 @@ import { FieldValues, Path, UseFormReturn } from 'react-hook-form';
 type InputProps = {
   label: string;
   description?: string;
-  placeholder: string;
+  placeholder?: string;
 };
 
 interface FormFieldProps<TFieldValues extends FieldValues> extends InputProps {
@@ -43,7 +43,7 @@ export default function FormField<TFieldValues extends FieldValues = FieldValues
               <Input placeholder={placeholder} {...field} />
             )}
           </FormControl>
-          {description && <FormDescription>{description}</FormDescription>}
+          {description && <FormDescription className="text-xs pl-2">{description}</FormDescription>}
           <FormMessage />
         </FormItem>
       )}

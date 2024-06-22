@@ -1,7 +1,10 @@
-import { ArrowRight } from 'lucide-react';
+import { CreateSession, JoinSession } from '@/components/session';
 import ReactWrapBalancer from 'react-wrap-balancer';
 import Github from '@/components/common/icons/Github';
 import { Button } from '@/components/ui/button';
+import { ArrowRight } from 'lucide-react';
+import NestedModalsUIProvider from '@/context/NestedModalsUIProvider';
+import CreateCustomVotingSystem from '@/components/session/create/CustomVotingSystem/CreateCustomVotingSystem';
 
 export default function Home() {
   return (
@@ -18,8 +21,11 @@ export default function Home() {
         Empower your Agile team with Scrum Poker, a fun tool for better and precise project estimations
       </p>
       <div className="flex gap-5 mt-5 ">
-        <Button className="bg-black hover:bg-black/90 transition-all ease-in-out duration-300">Create a session</Button>
-        <Button className="bg-black hover:bg-black/90 transition-all ease-in-out duration-300">Join a session</Button>
+        <NestedModalsUIProvider>
+          <CreateSession />
+          <CreateCustomVotingSystem />
+        </NestedModalsUIProvider>
+        <JoinSession />
       </div>
     </div>
   );
