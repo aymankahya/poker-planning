@@ -1,4 +1,4 @@
-import AccountDropdownItem from '@/components/header/components/AccountDropdownItem';
+import AccountDropdownItem from '@/components/header/AccountDropdownItem';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import {
   DropdownMenu,

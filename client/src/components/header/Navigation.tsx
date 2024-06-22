@@ -1,4 +1,4 @@
-import NavigationItem from '@/components/header/components/NavigationItem';
+import NavigationItem from '@/components/header/NavigationItem';
 import { NavigationMenu, NavigationMenuList, NavigationMenuItem } from '@/components/ui/navigation-menu';
 import { pathConstants as paths } from '@/routes/pathConstants';
 

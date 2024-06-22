@@ -1,4 +1,4 @@
-import { navigationList } from '@/components/header/components/Navigation';
+import { navigationList } from '@/components/header/Navigation';
 
 import { Sheet, SheetContent, SheetHeader, SheetTrigger } from '@/components/ui/sheet';
 import { Menu as MenuIcon } from 'lucide-react';
