@@ -9,11 +9,11 @@ const loginController = async (req: Request, res: Response, next: NextFunction) 
     if (!user) return res.status(404).json({ success: false, error: 'No user found' });
     const match = await compare(req.body.password, user.password);
     if (!match) return res.status(401).json({ success: false, error: 'Wrong password' });
-    const jwtToken = issueToken(user, 'user', '2d');
+    const jwtToken = issueToken(user, '2d');
     return res.status(200).json({
       success: true,
-      user: { id: user._id, username: user.username, role: jwtToken.role },
-      token: jwtToken.token,
+      user: { id: user._id, username: user.username },
+      token: jwtToken,
     });
   } catch (err) {
     return next(err);
