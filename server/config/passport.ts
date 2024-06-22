@@ -1,14 +1,15 @@
-import { Strategy as JWTStrategy, ExtractJwt, StrategyOptions } from 'passport-jwt';
+import { Strategy as JWTStrategy, ExtractJwt, StrategyOptionsWithRequest } from 'passport-jwt';
 import path from 'path';
 import fs from 'fs';
 import { User } from '@/models/User';
 
 const PUB_KEY = fs.readFileSync(path.join(__dirname, '..', 'rsa_key_prv.pem'), 'utf-8');
 
-const options: StrategyOptions = {
+const options: StrategyOptionsWithRequest = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
   secretOrKey: PUB_KEY, // Update with Public Key Value
   algorithms: ['RS256'],
+  passReqToCallback: true,
 };
 
 const strategy = new JWTStrategy(options, async (payload, done) => {
