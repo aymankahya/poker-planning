@@ -7,7 +7,7 @@ export const SessionSchema = new Schema({
   issues: [{ type: Schema.Types.ObjectId, ref: 'Issue', required: true }],
   admin: [{ type: Schema.Types.Mixed, required: true }],
   adminAll: { type: Boolean, required: true },
-  votingSystem: [{ type: Schema.Types.Mixed, required: true }],
+  votingSystem: { type: Number, required: true },
   currentVotes: {
     type: Map,
     of: String,

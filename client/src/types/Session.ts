@@ -8,7 +8,7 @@ export type Session = {
   issues: Issue[];
   players: User[];
   guests: User[];
-  admin: string[];
+  admin: (string | User)[];
   settings: SessionSetting;
   currentVotes: { [key: string]: string };
   activeIssue: string;

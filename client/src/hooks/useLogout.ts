@@ -12,7 +12,6 @@ export default function useLogout() {
 
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-    localStorage.removeItem('settings');
     window.location.href = '/';
     // Return null here for consistent-return rule in ESLint
     return null;

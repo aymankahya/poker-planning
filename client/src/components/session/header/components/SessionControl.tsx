@@ -1,5 +1,3 @@
-import CreateCustomVotingSystem from '@/components/session/create/CustomVotingSystem/CreateCustomVotingSystem';
-import { SessionSettings } from '@/components/session/header/components/SessionSettings/';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -8,43 +6,18 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { useToast } from '@/components/ui/use-toast';
-import NestedModalsUIProvider from '@/context/NestedModalsUIProvider';
-import { useAuth } from '@/hooks';
 import useSession from '@/hooks/useSession';
+
 import { ChevronDown, Home, LucideProps, Settings } from 'lucide-react';
-import React, { useState } from 'react';
+import React from 'react';
+
+const sessionControls = [
+  { title: 'Session settings', icon: (props: Omit<LucideProps, 'ref'>) => <Settings {...props} /> },
+  { title: 'Go to homepage', icon: (props: Omit<LucideProps, 'ref'>) => <Home {...props} /> },
+];
 
 export default function SessionControl() {
   const { session } = useSession();
-  const { user } = useAuth();
-  const { toast } = useToast();
-  const [settingsOpen, setOpenSettings] = useState<boolean>(false);
-
-  const sessionControls = [
-    {
-      title: 'Session settings',
-      icon: (props: Omit<LucideProps, 'ref'>) => <Settings {...props} />,
-      handleClick: () => {
-        if (!session?.admin.includes(user?.id.toString() ?? '')) {
-          return toast({
-            title: "You don't have permission to manage session settings",
-            description: 'Request to be added as administrator by the session facilator',
-            variant: 'destructive',
-          });
-        }
-        return setOpenSettings(true);
-      },
-    },
-    {
-      title: 'Go to homepage',
-      icon: (props: Omit<LucideProps, 'ref'>) => <Home {...props} />,
-      handleClick: () => {
-        window.location.href = '/';
-      },
-    },
-  ];
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild className="group flex items-center gap-2">
@@ -53,15 +26,11 @@ export default function SessionControl() {
           <ChevronDown className="w-5 h-5 transition duration-200 group-data-[state=open]:rotate-180" />
         </Button>
       </DropdownMenuTrigger>
-      <NestedModalsUIProvider>
-        <SessionSettings openState={settingsOpen} setOpenSettings={setOpenSettings} />
-        <CreateCustomVotingSystem />
-      </NestedModalsUIProvider>
       <DropdownMenuContent align="start" className="min-w-[200px]">
         {sessionControls.map((control, index) => {
           return (
             <React.Fragment key={control.title}>
-              <DropdownMenuItem onClick={control.handleClick}>
+              <DropdownMenuItem>
                 <span aria-hidden className="mr-2 h-4 w-4">
                   {control.icon({ className: 'mr-2 h-4 w-4' })}
                 </span>

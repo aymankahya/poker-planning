@@ -7,5 +7,3 @@ export { default as createSessionController } from '@/controllers/session/create
 export { default as getSessionDataController } from '@/controllers/session/getSessionDataController';
 export { default as joinSessionController } from '@/controllers/session/joinSessionController';
 export { default as createNewIssue } from '@/controllers/session/createNewIssue';
-export { default as createCustomValidationController } from '@/controllers/session/createCustomVotingController';
-export { default as updateSessionSettingsController } from '@/controllers/session/updateSessionSettingsController';

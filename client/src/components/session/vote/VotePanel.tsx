@@ -2,6 +2,7 @@ import VoteCard from '@/components/session/vote/components/VoteCard';
 import { useAuth } from '@/hooks';
 import useIssueBar from '@/hooks/useIssueBar';
 import useSession from '@/hooks/useSession';
+import { DEFAULT_VOTING_SYSTEMS } from '@/utils/constants/DEFAULT_VOTING_SYSTEM';
 import { cx } from 'class-variance-authority';
 
 export default function VotePanel() {
@@ -16,7 +17,7 @@ export default function VotePanel() {
     >
       <p className="typography-small text-lg font-medium">Pick your points</p>
       <div className="flex items-center justify-center gap-2 ">
-        {session?.settings.votingSystem.map((point) => (
+        {DEFAULT_VOTING_SYSTEMS.get(session?.settings.votingSystem ?? 1)?.map((point) => (
           <VoteCard
             key={point}
             point={point}

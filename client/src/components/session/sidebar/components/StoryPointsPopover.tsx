@@ -3,6 +3,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Popover } from '@/components/ui/popover';
 import useSession from '@/hooks/useSession';
 import useSetStoryPoint from '@/hooks/useSetStoryPoint';
+import { DEFAULT_VOTING_SYSTEMS } from '@/utils/constants/DEFAULT_VOTING_SYSTEM';
 import { PopoverContent, PopoverTrigger } from '@radix-ui/react-popover';
 import { cx } from 'class-variance-authority';
 import { useState } from 'react';
@@ -39,8 +40,8 @@ export default function StoryPointsPopover({
       <PopoverContent side="left" sideOffset={10}>
         <Card className="border-0 shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
           <CardContent className="grid grid-cols-4 gap-2 p-2 max-w-[300px] ">
-            {session?.settings.votingSystem.length !== 0 ? (
-              session?.settings.votingSystem.map((vote) => {
+            {session?.settings.votingSystem ? (
+              DEFAULT_VOTING_SYSTEMS.get(session?.settings.votingSystem)?.map((vote) => {
                 return (
                   <Button
                     key={vote}
