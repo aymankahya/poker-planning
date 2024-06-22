@@ -1,8 +1,8 @@
-import CreateSession from '@/components/session/create/CreateSession';
+import { ArrowRight } from 'lucide-react';
 import ReactWrapBalancer from 'react-wrap-balancer';
 import Github from '@/components/common/icons/Github';
 import { Button } from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
+import CreateSession from '@/components/session/create/CreateSession';
 
 export default function Home() {
   return (
