@@ -4,5 +4,3 @@ export { default as authController } from '@/controllers/authentication/authCont
 export { default as logoutController } from '@/controllers/authentication/logoutController';
 export { default as createSessionController } from '@/controllers/session/createSessionController';
 export { default as getSessionData } from '@/controllers/session/getSessionData';
-export { default as joinSessionController } from '@/controllers/session/joinSessionController';
-export { default as createGuestController } from '@/controllers/authentication/createGuestController';

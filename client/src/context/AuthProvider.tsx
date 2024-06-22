@@ -8,7 +8,6 @@ type AuthProviderProp = {
 type User = {
   username: string;
   id: number;
-  role: 'user' | 'guest';
 };
 
 type AuthContextValue = {

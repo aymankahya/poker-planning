@@ -1,4 +1,4 @@
-import { CreateSession, JoinSession } from '@/components/session';
+import CreateSession from '@/components/session/create/CreateSession';
 import ReactWrapBalancer from 'react-wrap-balancer';
 import Github from '@/components/common/icons/Github';
 import { Button } from '@/components/ui/button';
@@ -20,7 +20,7 @@ export default function Home() {
       </p>
       <div className="flex gap-5 mt-5 ">
         <CreateSession />
-        <JoinSession />
+        <Button className="bg-black hover:bg-black/90 transition-all ease-in-out duration-300">Join a session</Button>
       </div>
     </div>
   );
