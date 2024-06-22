@@ -1,11 +1,10 @@
-import "module-alias/register";
 import express from "express";
 import passport from "passport";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
 import cors from "cors";
 import dotenv from "dotenv";
-import connectDB from "@/config/database";
+import connectDB from "./config/database";
 import strategy from "@/config/passport";
 
 dotenv.config();
