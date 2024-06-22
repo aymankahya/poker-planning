@@ -8,10 +8,5 @@ export default function useAuth() {
     throw new Error('useAuth must be used inside an AuthContextProvider');
   }
 
-  return {
-    user: userContext?.user,
-    setUser: userContext?.setUser ?? (() => {}),
-    isAuth: userContext?.isAuth,
-    authLoading: userContext?.authLoading,
-  };
+  return { user: userContext?.user, setUser: userContext?.setUser ?? (() => {}) };
 }

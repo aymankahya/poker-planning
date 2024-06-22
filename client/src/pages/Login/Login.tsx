@@ -1,13 +1,13 @@
 import { Spinner } from '@/components/ui/spinner';
 import AlertBox from '@/components/common/AlertBox';
-import { useAuth, useLogin } from '@/hooks';
+import { useCheckAuth, useLogin } from '@/hooks';
 import AuthLayout from '@/layouts/AuthLayout';
 import LoginForm from '@/pages/Login/components/LoginForm';
 import { Navigate } from 'react-router-dom';
 
 export default function Login() {
-  const { isAuth, authLoading } = useAuth();
   const { loading, error, login } = useLogin();
+  const { isAuth, authLoading } = useCheckAuth();
   return isAuth ? (
     <Navigate to="/" />
   ) : (
