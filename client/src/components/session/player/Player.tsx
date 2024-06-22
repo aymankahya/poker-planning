@@ -19,12 +19,8 @@ export default function Player({ playerInfo = { id: '', username: 'Anonymous' },
     <HoverCard
       trigger={
         <div className="flex flex-col items-center gap-2 max-w-[100px] w-full ">
-          <PlayerCard
-            visible={session?.votingState === 'completed'}
-            score={session?.currentVotes[playerInfo?.id]}
-            hasVoted={Object.keys(session?.currentVotes).includes(playerInfo?.id)}
-          />
-          <p className="text-sm text-center font-bold cursor-pointer">{playerInfo.username}</p>
+          <PlayerCard />
+          <p className="text-sm text-center break-words font-bold cursor-pointer">{playerInfo.username}</p>
         </div>
       }
       hoverContent={<KickOutButton />}
@@ -32,14 +28,9 @@ export default function Player({ playerInfo = { id: '', username: 'Anonymous' },
       side={side}
     />
   ) : (
-    <div className="flex flex-col items-center max-w-[100px] justify-center gap-2">
-      <PlayerCard
-        visible={session?.votingState === 'completed'}
-        score={session?.currentVotes[playerInfo?.id] ?? ''}
-        hasVoted={Object.keys(session?.currentVotes ?? {}).includes(playerInfo?.id) ?? false}
-        className="cursor-auto"
-      />
-      <p className="text-sm text-center font-bold">{playerInfo.username}</p>
+    <div className="flex flex-col items-center justify-center gap-2">
+      <PlayerCard className="cursor-auto hover:bg-inherit" />
+      <p className="text-sm text-center break-words font-bold">{playerInfo.username}</p>
     </div>
   );
 }

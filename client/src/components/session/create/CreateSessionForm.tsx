@@ -6,7 +6,6 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { useAuth, useCreateSession } from '@/hooks';
 import { z } from 'zod';
 import { VOTING_SYSTEM } from '@/utils/constants/VOTING_SYSTEM';
-import useCheckAuth from '@/hooks/useCheckAuth';
 
 const CreateSessionFormGuestUserSchema = z.object({
   guestName: z.string().min(3, { message: 'Player name must be at least 3 characters long' }),
@@ -27,8 +26,7 @@ type CreateSessionFormFields =
 
 export default function CreateSessionForm() {
   const { createSession, loading } = useCreateSession();
-  const { isAuth } = useCheckAuth();
-  const { user } = useAuth();
+  const { user, isAuth } = useAuth();
   const CreateSessionFormSchema = isAuth ? CreateSessionFormAuthUserSchema : CreateSessionFormGuestUserSchema;
 
   const defaultValues = isAuth
@@ -49,13 +47,7 @@ export default function CreateSessionForm() {
   });
 
   const onSubmit: SubmitHandler<CreateSessionFormFields> = (data) => {
-    if (user?.role === 'guest') {
-      createSession({ ...data, guestId: user?.id });
-    } else if (user?.role === 'user') {
-      createSession({ ...data, id: user?.id });
-    } else {
-      createSession({ ...data });
-    }
+    createSession({ ...data, id: user?.id });
   };
 
   return (

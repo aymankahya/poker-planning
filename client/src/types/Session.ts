@@ -10,5 +10,4 @@ export type Session = {
   guests: User[];
   admin: (string | User)[];
   settings: SessionSetting;
-  currentVotes: { [key: string]: string };
 };

@@ -32,8 +32,6 @@ const getSessionData = async (req: Request, res: Response) => {
         return admin._id;
       }),
       settings: { adminAll: session?.adminAll, votingSystem: session?.votingSystem },
-      currentVotes: session?.currentVotes,
-      votingState: session?.votingState,
     });
   } catch (err) {
     return res.status(500);

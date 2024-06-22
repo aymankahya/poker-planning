@@ -1,5 +1,4 @@
 import VoteCard from '@/components/session/vote/components/VoteCard';
-import { useAuth } from '@/hooks';
 import useIssueBar from '@/hooks/useIssueBar';
 import useSession from '@/hooks/useSession';
 import { cx } from 'class-variance-authority';
@@ -12,7 +11,6 @@ const DEFAULT_VOTING_SYSTEMS = new Map([
 
 export default function VotePanel() {
   const { issueBarContext } = useIssueBar();
-  const { user } = useAuth();
   const { session } = useSession();
   return (
     <div
@@ -23,11 +21,7 @@ export default function VotePanel() {
       <p className="typography-small text-lg font-medium">Pick your points</p>
       <div className="flex items-center justify-center gap-2 ">
         {DEFAULT_VOTING_SYSTEMS.get(session?.settings.votingSystem ?? 1)?.map((point) => (
-          <VoteCard
-            key={point}
-            point={point}
-            active={session?.currentVotes[user?.id.toString() ?? ''] === point.toString()}
-          />
+          <VoteCard key={point} point={point} />
         ))}
       </div>
     </div>

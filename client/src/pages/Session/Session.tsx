@@ -11,7 +11,9 @@ export default function Session() {
   const { dataLoading } = useSession();
   const { socket } = useSocket();
   const { updateSession } = useUpdateSession();
-  socket?.on('update-session', (sessionData) => updateSession(sessionData));
+
+  socket?.on('update-session', updateSession);
+
   return dataLoading ? (
     <Spinner size="large" />
   ) : (

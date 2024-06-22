@@ -6,7 +6,6 @@ import { FormField } from '@/components/common/form';
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
 import useJoinSession from '@/hooks/useJoinSession';
-import useCheckAuth from '@/hooks/useCheckAuth';
 
 const JoinSessionGuestFormSchema = z.object({
   guestName: z.string().min(3, { message: 'Player name must be at least 3 characters long' }),
@@ -20,8 +19,7 @@ const JoinSessionAuthUserFormSchema = z.object({
 type JoinSessionFormFields = z.infer<typeof JoinSessionAuthUserFormSchema> | z.infer<typeof JoinSessionGuestFormSchema>;
 
 export default function JoinSessionForm() {
-  const { isAuth } = useCheckAuth();
-  const { user } = useAuth();
+  const { user, isAuth } = useAuth();
   const { joinSession, loading } = useJoinSession();
   const JoinSessionFormSchema = isAuth ? JoinSessionAuthUserFormSchema : JoinSessionGuestFormSchema;
 
@@ -33,13 +31,7 @@ export default function JoinSessionForm() {
   });
 
   const onSubmit: SubmitHandler<JoinSessionFormFields> = (data) => {
-    if (user?.role === 'guest') {
-      joinSession({ ...data, guestId: user?.id });
-    } else if (user?.role === 'user') {
-      joinSession({ ...data, id: user?.id });
-    } else {
-      joinSession({ ...data });
-    }
+    joinSession({ ...data, id: user?.id });
   };
 
   return (
