@@ -24,7 +24,6 @@ const createSessionController = async (req: Request, res: Response, next: NextFu
       votingSystem: req.body.voteSystem,
       currentVotes: new Map(),
       votingState: 'notStarted',
-      activeIssue: '',
     });
 
     await session.save();
