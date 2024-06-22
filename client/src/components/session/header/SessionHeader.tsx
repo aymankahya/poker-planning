@@ -7,7 +7,6 @@ import { cx } from 'class-variance-authority';
 
 export default function SessionHeader() {
   const { issueBarContext } = useIssueBar();
-
   return (
     <div className="flex items-center justify-between px-5 py-2 ">
       <SessionInfo />

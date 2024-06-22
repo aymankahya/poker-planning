@@ -59,7 +59,6 @@ export default function SignUpForm() {
   });
 
   const onSubmit: SubmitHandler<SignUpFormFields> = async (data) => {
-    // To be added in a seperate custom hook => useSignup
     await fetch(`${import.meta.env.VITE_SERVER_URL}/sign-up`, {
       method: 'POST',
       headers: {
