@@ -2,8 +2,13 @@ import VoteCard from '@/components/session/vote/components/VoteCard';
 import { useAuth } from '@/hooks';
 import useIssueBar from '@/hooks/useIssueBar';
 import useSession from '@/hooks/useSession';
-import { DEFAULT_VOTING_SYSTEMS } from '@/utils/constants/DEFAULT_VOTING_SYSTEM';
 import { cx } from 'class-variance-authority';
+
+const DEFAULT_VOTING_SYSTEMS = new Map([
+  [1, [0, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, String.fromCodePoint(0x2615), '?']],
+  [2, [0, '½', 1, 2, 3, 5, 8, 13, 20, 40, 100]],
+  [3, ['XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL']],
+]);
 
 export default function VotePanel() {
   const { issueBarContext } = useIssueBar();

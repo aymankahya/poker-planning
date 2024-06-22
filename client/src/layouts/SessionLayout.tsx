@@ -1,4 +1,3 @@
-import { Toaster } from '@/components/ui/toaster';
 import SessionProvider from '@/context/SessionProvider';
 import SocketProvider from '@/context/SocketProvider';
 import useSession from '@/hooks/useSession';
@@ -13,7 +12,6 @@ export default function SessionLayout() {
       <SocketProvider>
         <SessionProvider>
           <Session />
-          <Toaster />
         </SessionProvider>
       </SocketProvider>
     </div>
