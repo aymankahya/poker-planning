@@ -39,7 +39,7 @@ module.exports = {
         '.typography-h3': { '@apply scroll-m-20 text-2xl font-semibold tracking-tight': '' },
         '.typography-h4': { '@apply scroll-m-20 text-xl font-semibold tracking-tight': '' },
         '.typography-p': { '@apply leading-7 [&:not(:first-child)]:mt-6': '' },
-        '.typography-small': { '@apply text-sm font-light leading-none': '' },
+        '.typography-small': { '@apply text-sm font-medium leading-none': '' },
       });
     }),
   ],
