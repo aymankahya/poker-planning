@@ -7,7 +7,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { useAuth } from '@/hooks';
 import dynamicIconImports from 'lucide-react/dynamicIconImports';
 import React from 'react';
 
@@ -24,12 +23,11 @@ const accountActions: AccountActionsInterface[] = [
 ];
 
 export default function AccountDropdopwnMenu() {
-  const { user } = useAuth();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger tabIndex={0} className="cursor-pointer " asChild>
         <Avatar>
-          <AvatarFallback>{user?.username[0]}</AvatarFallback>
+          <AvatarFallback>A</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="mt-1">

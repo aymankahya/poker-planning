@@ -12,14 +12,9 @@ const LoginFormSchema = z.object({
   password: z.string(),
 });
 
-export type LoginFormFields = z.infer<typeof LoginFormSchema>;
+type LoginFormFields = z.infer<typeof LoginFormSchema>;
 
-type LoginFormProps = {
-  login: (data: { email: string; password: string }) => Promise<void>;
-  loading: boolean;
-};
-
-export default function LoginForm({ login, loading }: LoginFormProps) {
+export default function LoginForm() {
   const form = useForm<LoginFormFields>({
     resolver: zodResolver(LoginFormSchema),
     defaultValues: {
@@ -28,8 +23,14 @@ export default function LoginForm({ login, loading }: LoginFormProps) {
     },
   });
 
-  const onSubmit: SubmitHandler<LoginFormFields> = (data) => {
-    login(data);
+  const onSubmit: SubmitHandler<LoginFormFields> = async (data) => {
+    await fetch('http://localhost:3000/login', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify({ email: data.email, password: data.password }),
+    });
   };
 
   return (
@@ -43,9 +44,7 @@ export default function LoginForm({ login, loading }: LoginFormProps) {
           <form className="flex flex-col gap-5 " onSubmit={form.handleSubmit(onSubmit)}>
             <FormField name="email" form={form} label="Email" placeholder="Enter your Email" />
             <FormField name="password" form={form} label="Password" placeholder="Enter your Password" />
-            <Button type="submit" disabled={loading}>
-              Login
-            </Button>
+            <Button type="submit">Login</Button>
           </form>
         </Form>
         <p className="typography-small flex justify-center mt-5 gap-1">

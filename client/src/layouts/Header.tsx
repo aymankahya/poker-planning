@@ -3,7 +3,8 @@ import Navigation from '@/components/header/Navigation';
 import HamburgerMenu from '@/components/header/HamburgerMenu';
 import { Button } from '@/components/ui/button';
 import User from '@/components/header/User';
-import { useScroll, useAuth } from '@/hooks/';
+import useAuth from '@/hooks/useAuth';
+import useScroll from '@/hooks/useScroll';
 import { Link } from 'react-router-dom';
 
 function Header() {
