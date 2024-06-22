@@ -15,7 +15,17 @@ const createSessionValidation = [
     .isLength({ min: 3 })
     .withMessage('Session name should be at least 3 characters long'),
 
-  // check('votingSystem').trim().escape().isNumeric(),
+  check('votingSystem').trim().escape().isArray(),
+  check('votingSystem.*')
+    .custom((value) => {
+      if (typeof value === 'string' || typeof value === 'number') {
+        return true;
+      }
+      throw new Error();
+    })
+    .withMessage('voting system should contain either strings or number')
+    .trim()
+    .escape(),
 
   check('adminAll').trim().escape().isBoolean(),
 
