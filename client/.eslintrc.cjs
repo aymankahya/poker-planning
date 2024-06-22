@@ -38,6 +38,7 @@ module.exports = {
     'no-nested-ternary': 'off',
     'react-hooks/exhaustive-deps': 'off',
     'no-param-reassign': ['error', { props: false }],
+    'react/no-unstable-nested-components': 'off',
   },
   settings: {
     'import/resolver': {

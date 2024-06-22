@@ -21,7 +21,7 @@ const createSessionController = async (req: Request, res: Response, next: NextFu
       guests: !user ? [guest] : [],
       admin: user ? [user] : [guest?._id],
       adminAll: req.body.adminAll,
-      votingSystem: req.body.voteSystem,
+      votingSystem: req.body.votingSystem,
       currentVotes: new Map(),
       votingState: 'notStarted',
       activeIssue: '',

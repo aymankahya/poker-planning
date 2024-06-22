@@ -20,6 +20,7 @@ const signupController = async (req: Request, res: Response, next: NextFunction)
         lastName: req.body.lastName,
         email: req.body.email,
         password: hashedPassword,
+        customVotingSystem: [],
       });
 
       await newUser.save();

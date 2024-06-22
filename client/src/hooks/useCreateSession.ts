@@ -11,7 +11,9 @@ export default function useCreateSession() {
   const [loading, setLoading] = useState<boolean>(false);
 
   const createSession = async (
-    data: CreateSessionFormFields & { id?: number | undefined } & { guestId?: number | undefined },
+    data: CreateSessionFormFields & { votingSystem: (string | number)[] } & { id?: number | undefined } & {
+      guestId?: number | undefined;
+    },
   ) => {
     try {
       setLoading(true);

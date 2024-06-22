@@ -8,6 +8,7 @@ export interface IUser extends Document {
   email: string;
   password: string;
   username: string;
+  customVotingSystem: { values: (string | number)[]; label: string }[];
 }
 
 export const UserSchema = new Schema<IUser>(
@@ -16,6 +17,15 @@ export const UserSchema = new Schema<IUser>(
     lastName: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
+    customVotingSystem: [
+      new Schema(
+        {
+          values: [Schema.Types.Mixed],
+          label: { type: String, required: true },
+        },
+        { _id: false },
+      ),
+    ],
   },
   {
     toJSON: { virtuals: true },
