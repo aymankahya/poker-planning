@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { loginController, signupController } from '@/controllers';
-import { validateUserLoginInfo, validateUserRegisterInfo } from '@/validation';
+import { validateUserLoginInfo } from '@/validation';
+import { validateUserRegisterInfo } from '@/validation/userSignupValidation';
 
 const router = Router();
 
