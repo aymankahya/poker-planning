@@ -34,17 +34,17 @@ export default function FormField<TFieldValues extends FieldValues = FieldValues
       control={form.control}
       name={name}
       render={({ field }) => (
-        <FormItem className="grow">
+        <FormItem>
           <FormLabel>{label}</FormLabel>
           <FormControl>
             {name === 'password' || name === 'confirmPassword' ? (
-              <PasswordInput placeholder={placeholder} {...field} />
+              <PasswordInput placeholder={placeholder} />
             ) : (
               <Input placeholder={placeholder} {...field} />
             )}
           </FormControl>
           {description && <FormDescription>{description}</FormDescription>}
-          <FormMessage />
+          <FormMessage className="break-all" />
         </FormItem>
       )}
     />
