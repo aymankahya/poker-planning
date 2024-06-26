@@ -48,7 +48,7 @@ export default function IssueCard({ issueId, type, title, estimatedPoints, activ
             contentEditable={editCardActive}
             suppressContentEditableWarning
             className={cx(
-              'text-sm font-normal text-slate-500',
+              'text-sm font-normal text-slate-500 max-[500px]:text-xs',
               { 'text-slate-400': active },
               { 'cursor-pointer pr-2 text-green-600 focus-visible:outline-none': editCardActive && !active },
               { 'cursor-pointer pr-2 text-lime-400 focus-visible:outline-none': editCardActive && active },
@@ -67,7 +67,7 @@ export default function IssueCard({ issueId, type, title, estimatedPoints, activ
           contentEditable={editCardActive}
           suppressContentEditableWarning
           className={cx(
-            '!mt-0 text-black text-md w-fit',
+            '!mt-0 text-black text-md w-fit max-[500px]:text-sm',
             { 'text-white': active },
             { 'cursor-pointer pr-2 text-green-600 focus-visible:outline-none': editCardActive && !active },
             { 'cursor-pointer pr-2 text-lime-400 focus-visible:outline-none': editCardActive && active },
@@ -81,7 +81,7 @@ export default function IssueCard({ issueId, type, title, estimatedPoints, activ
           <Button
             onClick={() => handleVoteIssue(issueId)}
             variant="default"
-            className={cx('bg-slate-200 text-black hover:bg-slate-300', {
+            className={cx('bg-slate-200 text-black hover:bg-slate-300 max-[500px]:text-xs', {
               'bg-slate-600 text-white hover:bg-slate-700 ring-1 ring-white ring-offset-slate-800 ring-offset-4 ':
                 active,
             })}
@@ -94,7 +94,7 @@ export default function IssueCard({ issueId, type, title, estimatedPoints, activ
               <StoryPointsPopover
                 issueId={issueId}
                 value={estimatedPoints}
-                className={cx({ 'bg-slate-600 text-white hover:bg-slate-700': active })}
+                className={cx('max-[500px]:text-xs', { 'bg-slate-600 text-white hover:bg-slate-700': active })}
                 hideHoverContentOnOpen={setOpenPopover}
                 open={
                   !session?.settings.adminAll && !session?.admin.includes(user?.id.toString() ?? '') ? false : undefined
@@ -103,7 +103,9 @@ export default function IssueCard({ issueId, type, title, estimatedPoints, activ
             }
             hoverContent={
               !popoverOpened && (
-                <p className="text-sm text-white p-2 w-fit border-0 bg-slate-700 rounded-md">Select story points</p>
+                <p className="text-sm text-white p-2 w-fit border-0 bg-slate-700 rounded-md max-[500px]:text-xs">
+                  Select story points
+                </p>
               )
             }
             delay={10}

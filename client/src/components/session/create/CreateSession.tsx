@@ -6,7 +6,9 @@ export default function CreateSession() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="bg-black hover:bg-black/90 transition-all ease-in-out duration-300">Create a session</Button>
+        <Button className="bg-black hover:bg-black/90 transition-all ease-in-out duration-300 min-w-[12rem]">
+          Create a session
+        </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogTitle>Create a New Session</DialogTitle>

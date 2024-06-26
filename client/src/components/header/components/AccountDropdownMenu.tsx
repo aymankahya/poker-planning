@@ -20,8 +20,7 @@ type AccountActionsInterface = {
 };
 
 const accountActions: AccountActionsInterface[] = [
-  { name: 'Settings', icon: 'settings', seperator: true },
-  { name: 'Edit', icon: 'pencil', seperator: false },
+  // { name: 'Settings', icon: 'settings', seperator: true },
   { name: 'Log out', icon: 'log-out', seperator: true },
 ];
 

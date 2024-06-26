@@ -24,7 +24,7 @@ export default function Player({ playerInfo = { id: '', username: 'Anonymous' },
             score={session?.currentVotes[playerInfo?.id]}
             hasVoted={Object.keys(session?.currentVotes).includes(playerInfo?.id)}
           />
-          <p className="text-sm text-center font-bold cursor-pointer">{playerInfo.username}</p>
+          <p className="text-sm text-center font-bold cursor-pointer max-[640px]:text-xs">{playerInfo.username}</p>
         </div>
       }
       hoverContent={<KickOutButton />}
@@ -39,7 +39,7 @@ export default function Player({ playerInfo = { id: '', username: 'Anonymous' },
         hasVoted={Object.keys(session?.currentVotes ?? {}).includes(playerInfo?.id) ?? false}
         className="cursor-auto"
       />
-      <p className="text-sm text-center font-bold">{playerInfo.username}</p>
+      <p className="text-sm text-center font-bold max-[640px]:text-xs">{playerInfo.username}</p>
     </div>
   );
 }

@@ -9,7 +9,11 @@ export default function SessionLayout() {
   const { dataLoading } = useSession();
 
   return (
-    <div className={cx('flex flex-col w-screen h-dvh', { 'justify-center': dataLoading })}>
+    <div
+      className={cx('flex flex-col w-screen h-dvh overflow-hidden', {
+        'justify-center': dataLoading,
+      })}
+    >
       <SocketProvider>
         <SessionProvider>
           <Session />
