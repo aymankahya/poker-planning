@@ -40,7 +40,7 @@ export default function FormField<TFieldValues extends FieldValues = FieldValues
             {name === 'password' || name === 'confirmPassword' ? (
               <PasswordInput placeholder={placeholder} {...field} />
             ) : (
-              <Input placeholder={placeholder} {...field} />
+              <Input className="max-[350px]:text-xs" placeholder={placeholder} {...field} />
             )}
           </FormControl>
           {description && <FormDescription className="text-xs pl-2">{description}</FormDescription>}

@@ -4,10 +4,11 @@ import { Button } from '@/components/ui/button';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 import { Sheet, SheetContent, SheetHeader, SheetTrigger } from '@/components/ui/sheet';
 import { useAuth } from '@/hooks';
+import useIsSidebarModal from '@/hooks/useIsSidebarModal';
 import useIssueBar from '@/hooks/useIssueBar';
 import useSession from '@/hooks/useSession';
 import { cx } from 'class-variance-authority';
-import { Plus, Text } from 'lucide-react';
+import { FileStack, Plus } from 'lucide-react';
 import { useState } from 'react';
 
 export const buttonStyle = cx(
@@ -20,13 +21,15 @@ export default function IssueSideBar() {
   const { session } = useSession();
   const { user } = useAuth();
   const [showAddIssueForm, setShowAddIssueForm] = useState<boolean>(false);
+  const { isModal } = useIsSidebarModal(1120);
+
   return (
-    <Sheet modal={false} onOpenChange={() => issueBarContext.setBarOpened((prev) => !prev)}>
+    <Sheet modal={!!isModal} onOpenChange={() => issueBarContext.setBarOpened((prev) => !prev)}>
       <SheetTrigger>
         <HoverCard openDelay={10} closeDelay={10}>
           <HoverCardTrigger asChild>
             <div role="button" aria-label="Show issues" className={buttonStyle}>
-              <Text />
+              <FileStack />
             </div>
           </HoverCardTrigger>
           <HoverCardContent className="text-sm text-white p-2 w-fit border-0 bg-slate-700 " align="end" sideOffset={10}>
@@ -35,10 +38,17 @@ export default function IssueSideBar() {
         </HoverCard>
       </SheetTrigger>
       <SheetContent
-        className="min-w-[35rem] shadow-none data-[state=open]:duration-150"
-        onInteractOutside={(e) => e.preventDefault()}
+        className={cx(
+          'min-w-[35rem] shadow-none data-[state=open]:duration-0 max-[1200px]:min-w-[30rem] max-[700px]:min-w-full',
+          { 'data-[state=open]:duration-0': isModal },
+        )}
+        onInteractOutside={(e) => {
+          if (!isModal) {
+            e.preventDefault();
+          }
+        }}
       >
-        <SheetHeader>
+        <SheetHeader className="text-left">
           <h1 className="typography-h2">Issues</h1>
         </SheetHeader>
         <div className="mt-5">
@@ -62,9 +72,9 @@ export default function IssueSideBar() {
             disabled={
               showAddIssueForm || (!session?.settings.adminAll && !session?.admin.includes(user?.id.toString() ?? ''))
             }
-            className="flex items-center justify-start gap-2 text-md text-gray-400 w-full"
+            className="flex items-center justify-start gap-2 text-md text-gray-400 w-full max-[500px]:text-sm"
           >
-            <Plus />
+            <Plus className="max-[500px]:w-5" />
             Add a new issue
           </Button>
         </div>

@@ -12,6 +12,7 @@ import { useToast } from '@/components/ui/use-toast';
 import NestedModalsUIProvider from '@/context/NestedModalsUIProvider';
 import { useAuth } from '@/hooks';
 import useSession from '@/hooks/useSession';
+import { cx } from 'class-variance-authority';
 import { ChevronDown, Home, LucideProps, Settings } from 'lucide-react';
 import React, { useState } from 'react';
 
@@ -47,10 +48,15 @@ export default function SessionControl() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild className="group flex items-center gap-2">
-        <Button variant="ghost" className="text-xl text-black font-bold hover:text-black hover:bg-slate-100">
-          {session?.sessionName}
-          <ChevronDown className="w-5 h-5 transition duration-200 group-data-[state=open]:rotate-180" />
+      <DropdownMenuTrigger asChild className="group flex items-center gap-2 ">
+        <Button
+          variant="ghost"
+          className="text-xl text-black font-bold hover:text-black hover:bg-slate-100 max-[355px]:h-[2rem]"
+        >
+          <p className="max-[580px]:max-w-[15ch] max-[580px]:text-ellipsis max-[580px]:overflow-hidden max-[355px]:text-[16px] ">
+            {session?.sessionName}
+          </p>
+          <ChevronDown className="w-5 h-5 transition duration-200 group-data-[state=open]:rotate-180 max-[580px]:w-4" />
         </Button>
       </DropdownMenuTrigger>
       <NestedModalsUIProvider>
@@ -61,13 +67,16 @@ export default function SessionControl() {
         {sessionControls.map((control, index) => {
           return (
             <React.Fragment key={control.title}>
-              <DropdownMenuItem onClick={control.handleClick}>
+              <DropdownMenuItem
+                onClick={control.handleClick}
+                className={cx({ 'max-[580px]:hidden': control.title === 'Go to homepage' })}
+              >
                 <span aria-hidden className="mr-2 h-4 w-4">
                   {control.icon({ className: 'mr-2 h-4 w-4' })}
                 </span>
                 {control.title}
               </DropdownMenuItem>
-              {index !== sessionControls.length - 1 && <DropdownMenuSeparator />}
+              {index !== sessionControls.length - 1 && <DropdownMenuSeparator className="max-[580px]:hidden" />}
             </React.Fragment>
           );
         })}

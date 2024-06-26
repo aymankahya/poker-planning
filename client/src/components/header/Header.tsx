@@ -1,4 +1,4 @@
-import { Navigation, HamburgerMenu, User } from '@/components/header/components';
+import { User } from '@/components/header/components';
 import { Button } from '@/components/ui/button';
 import { useScroll, useAuth } from '@/hooks/';
 import { Link } from 'react-router-dom';
@@ -16,13 +16,14 @@ function Header() {
     >
       <div className="flex items-center justify-between max-w-screen-2xl m-auto">
         <div className="flex">
-          <HamburgerMenu />
+          {/* <HamburgerMenu /> */}
           <h3 className=" typography-h3">
             <Link to="/">Poker Planning</Link>
           </h3>{' '}
           {/* Replace with logo component */}
         </div>
-        <Navigation />
+        {/* <Navigation /> */}
+
         <div className="flex gap-4">
           {!user && (
             <div className="flex gap-2">

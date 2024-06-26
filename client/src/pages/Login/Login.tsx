@@ -6,9 +6,9 @@ import LoginForm from '@/pages/Login/components/LoginForm';
 import { Navigate } from 'react-router-dom';
 
 export default function Login() {
-  const { isAuth, authLoading } = useAuth();
+  const { user, isAuth, authLoading } = useAuth();
   const { loading, error, login } = useLogin();
-  return isAuth ? (
+  return isAuth && user?.role === 'user' ? (
     <Navigate to="/" />
   ) : (
     <AuthLayout>
