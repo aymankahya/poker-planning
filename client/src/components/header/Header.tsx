@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { useScroll, useAuth } from '@/hooks/';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
+import logo from '@/assets/logo.svg';
 
 function Header() {
   const { user } = useAuth();
@@ -15,13 +16,13 @@ function Header() {
       })}
     >
       <div className="flex items-center justify-between max-w-screen-2xl m-auto">
-        <div className="flex">
-          {/* <HamburgerMenu /> */}
-          <h3 className=" typography-h3">
-            <Link to="/">Poker Planning</Link>
-          </h3>{' '}
-          {/* Replace with logo component */}
-        </div>
+        {/* <HamburgerMenu /> */}
+        <Link to="/" className="flex items-center gap-1">
+          <img src={logo} alt="" className="h-10" />
+          <h3 className=" typography-h3 text-xl max-[385px]:hidden">Planning Poker</h3>
+        </Link>
+        {/* Replace with logo component */}
+
         {/* <Navigation /> */}
 
         <div className="flex gap-4">

@@ -6,6 +6,7 @@ import IssueSideBar from '@/components/session/sidebar/IssueSideBar';
 import { Separator } from '@/components/ui/separator';
 import useIssueBar from '@/hooks/useIssueBar';
 import { cx } from 'class-variance-authority';
+import logo from '@/assets/logo.svg';
 
 export default function SessionHeader() {
   const { issueBarContext } = useIssueBar();
@@ -13,7 +14,10 @@ export default function SessionHeader() {
   return (
     <div className="flex items-center justify-between px-5 py-2">
       <SessionHamburgerMenu />
-      <SessionInfo />
+      <div className="flex items-center">
+        <img src={logo} className="h-10 max-[580px]:hidden" />
+        <SessionInfo />
+      </div>
       <div
         className={cx('flex items-center gap-5 transition-all duration-150', {
           'mr-[35rem] max-[1200px]:mr-[30rem] max-[1120px]:mr-0': issueBarContext.barOpened,
