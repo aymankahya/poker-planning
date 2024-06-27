@@ -15,7 +15,7 @@ export default function SessionHeader() {
     <div className="flex items-center justify-between px-5 py-2">
       <SessionHamburgerMenu />
       <div className="flex items-center">
-        <img src={logo} className="h-10 max-[580px]:hidden" />
+        <img src={logo} alt="" className="h-10 max-[580px]:hidden" />
         <SessionInfo />
       </div>
       <div
