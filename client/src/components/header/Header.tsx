@@ -21,10 +21,7 @@ function Header() {
           <img src={logo} alt="" className="h-10" />
           <h3 className=" typography-h3 text-xl max-[385px]:hidden">Planning Poker</h3>
         </Link>
-        {/* Replace with logo component */}
-
         {/* <Navigation /> */}
-
         <div className="flex gap-4">
           {!user && (
             <div className="flex gap-2">
