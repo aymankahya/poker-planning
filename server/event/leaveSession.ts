@@ -23,6 +23,10 @@ const leaveSession = async (roomId: string, user: Omit<User, 'username'>, socket
       await session.updateOne({ players: session.players.filter((player) => player.toString() !== user.id) }).exec();
     }
 
+    if (session?.admin.includes(user.id)) {
+      await session.updateOne({ admin: session?.admin.filter((player) => player.toString() !== user.id) }).exec();
+    }
+
     session.currentVotes?.delete(user.id);
     await session.save();
 

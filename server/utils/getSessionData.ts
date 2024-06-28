@@ -27,7 +27,7 @@ const getSessionData = async (roomId: string) => {
       }
       return admin._id;
     }),
-    settings: { adminAll: session?.adminAll, votingSystem: session?.votingSystem },
+    settings: { votingSystem: session?.votingSystem },
     currentVotes: session?.currentVotes,
     votingState: session?.votingState,
     activeIssue: session?.activeIssue,

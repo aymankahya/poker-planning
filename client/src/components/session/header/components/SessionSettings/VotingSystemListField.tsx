@@ -81,7 +81,6 @@ export default function VotingSystemListField<TFieldValues extends FieldValues =
               </Command>
             </PopoverContent>
           </Popover>
-
           <FormMessage />
         </FormItem>
       )}

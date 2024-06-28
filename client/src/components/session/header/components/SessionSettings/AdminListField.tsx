@@ -35,7 +35,7 @@ export default function AdminListField<TFieldValues extends FieldValues = FieldV
               <FormControl>
                 <Button variant="outline" role="combobox" className="w-full justify-between hover:bg-transparent">
                   <div className="flex items-center gap-2">
-                    {session?.settings.adminAll || adminUsers === 'All Players'
+                    {adminUsers === 'All Players'
                       ? 'All Players'
                       : adminUsers.map((admin) => {
                           return (
@@ -68,7 +68,7 @@ export default function AdminListField<TFieldValues extends FieldValues = FieldV
                     className={cx('flex gap-3 cursor-pointer mb-2', {
                       'text-slate-400 bg-gray-100': adminUsers === 'All Players',
                     })}
-                    disabled={session?.settings.adminAll || adminUsers === 'All Players'}
+                    disabled={adminUsers === 'All Players'}
                     onSelect={() => {
                       form.setValue(
                         name,
@@ -82,7 +82,7 @@ export default function AdminListField<TFieldValues extends FieldValues = FieldV
                   </CommandItem>
                   {allPlayers.map((player) => {
                     return (
-                      (!adminUsers.includes(player.id) || session?.settings.adminAll) && (
+                      !adminUsers.includes(player.id) && (
                         <CommandItem
                           key={player.id}
                           value={player.id}

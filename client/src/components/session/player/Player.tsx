@@ -14,8 +14,7 @@ export default function Player({ playerInfo = { id: '', username: 'Anonymous' },
   const { user } = useAuth();
   const { session } = useSession();
 
-  return (session?.admin.includes(user?.id.toString() ?? '') || session?.settings.adminAll) &&
-    user?.id.toString() !== playerInfo.id ? (
+  return session?.admin.includes(user?.id.toString() ?? '') && user?.id.toString() !== playerInfo.id ? (
     <HoverCard
       trigger={
         <div className="flex flex-col items-center gap-2 max-w-[100px] w-full ">
