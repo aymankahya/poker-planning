@@ -31,27 +31,22 @@ export default function RoomTable() {
     tableState = 'newVote';
   }
 
-  // console.log('hasVoted: ', hasVoted);
-  // console.log('allVoted: ', allVoted);
-  // console.log('isAdmin: ', isAdmin);
-  // console.log('voteDone: ', voteDone);
-
   const tableContent: { [key: string]: ReactNode } = {
-    waiting: <p>Waiting for other player&apos;s votes...</p>,
-    pick: <p>Pick your card !</p>,
+    waiting: <p className="max-[400px]:px-1 text-center">Waiting for other player&apos;s votes...</p>,
+    pick: <p className="max-[400px]:px-1 text-center">Pick your card !</p>,
     reveal: (
       <Button
         onClick={() => socket?.emit('reveal-cards', getRoomIDFromUrl(location.pathname))}
-        className="min-w-[190px] text-md"
+        className="min-w-[190px] text-md max-[640px]:min-w-[150px] max-[400px]:min-w-[100px]"
       >
         Reveal cards
       </Button>
     ),
-    waitingNewVote: <p>Waiting for new vote</p>,
+    waitingNewVote: <p className="max-[400px]:px-1 text-center">Waiting for new vote</p>,
     newVote: (
       <Button
         onClick={() => socket?.emit('start-new-vote', getRoomIDFromUrl(location.pathname))}
-        className="min-w-[190px] text-md"
+        className="min-w-[190px] text-md max-[640px]:min-w-[150px] max-[400px]:min-w-[100px]"
       >
         Start new vote
       </Button>
@@ -59,7 +54,7 @@ export default function RoomTable() {
   };
 
   return (
-    <div className=" flex items-center justify-center w-full min-h-[10rem] h-auto rounded-3xl bg-slate-200">
+    <div className=" flex items-center justify-center w-full min-h-[10rem] h-auto rounded-3xl bg-slate-200 max-[640px]:min-h-[10rem]">
       {tableContent[tableState]}
     </div>
   );

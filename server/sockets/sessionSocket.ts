@@ -11,6 +11,7 @@ import {
   setEstimatedPoint,
   deleteIssue,
   editIssue,
+  kickOutPlayer,
 } from '@/event';
 
 const setupSessionSocket = () => {
@@ -56,6 +57,10 @@ const setupSessionSocket = () => {
     // Handling editing issue event
     socket.on('edit-issue', (roomId, issueId, newTitleValue, newTypeValue) =>
       editIssue(roomId, issueId, newTitleValue, newTypeValue, socket),
+    );
+
+    socket.on('kick-out-player', (roomId, playerId, userRole) =>
+      kickOutPlayer(users, roomId, playerId, userRole, socket),
     );
 
     // Handling user disconnecting from session

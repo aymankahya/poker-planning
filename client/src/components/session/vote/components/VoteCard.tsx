@@ -18,7 +18,7 @@ export default function VoteCard({ point, active = false }: VoteCardProps) {
       onClick={(e) => submitVote(e)}
       variant="outline"
       className={cx(
-        'text-[16px] hover:bg-slate-700 hover:text-white hover:-translate-y-3 transition-transform ease-out duration-700 p-3 h-auto min-w-[60px]',
+        ' snap-center text-[16px] hover:bg-slate-700 hover:text-white hover:-translate-y-3 transition-transform ease-out duration-700 p-3 h-auto min-w-[60px] max-[640px]:min-w-[50px] max-[640px]:text-sm max-[640px]:p-2',
         {
           'bg-slate-700 text-white hover:transform-none': active,
         },

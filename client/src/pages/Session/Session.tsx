@@ -10,15 +10,19 @@ import useSocket from '@/hooks/useSocket';
 export default function Session() {
   const { dataLoading } = useSession();
   const { socket } = useSocket();
+  const { session } = useSession();
   const { updateSession } = useUpdateSession();
   socket?.on('update-session', (sessionData) => updateSession(sessionData));
+  socket?.on('kick-out', () => {
+    window.location.href = '/';
+  });
   return dataLoading ? (
     <Spinner size="large" />
   ) : (
     <IssueBarProvider>
       <SessionHeader />
       <Room />
-      <VotePanel />
+      <VotePanel key={session?.settings.votingSystem.toString()} />
     </IssueBarProvider>
   );
 }

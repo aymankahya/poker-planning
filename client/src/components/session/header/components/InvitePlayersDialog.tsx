@@ -14,8 +14,19 @@ import { useLocation } from 'react-router-dom';
 import { getRoomIDFromUrl } from '@/utils';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
+import { cx } from 'class-variance-authority';
 
-export default function InvitePlayersDialog() {
+type InvitePlayersDialogProps = {
+  className?: string;
+  openDialog?: boolean;
+  setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export default function InvitePlayersDialog({
+  className,
+  openDialog = undefined,
+  setOpen = () => {},
+}: InvitePlayersDialogProps) {
   const location = useLocation();
   const { toast } = useToast();
 
@@ -28,8 +39,8 @@ export default function InvitePlayersDialog() {
   };
 
   return (
-    <Dialog>
-      <DialogTrigger className={buttonStyle}>
+    <Dialog open={openDialog} onOpenChange={(open) => setOpen(open)}>
+      <DialogTrigger className={cx(buttonStyle, className)}>
         <UserRoundPlus />
       </DialogTrigger>
       <DialogContent className="max-w-[45rem]">
