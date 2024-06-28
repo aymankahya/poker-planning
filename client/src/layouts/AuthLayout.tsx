@@ -1,4 +1,5 @@
 import Background from '@/components/common/Background';
+import { Toaster } from '@/components/ui/toaster';
 import { PropsWithChildren } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -10,6 +11,7 @@ export default function AuthLayout({ children }: PropsWithChildren) {
       </h3>
       {children}
       <Background />
+      <Toaster />
     </div>
   );
 }
