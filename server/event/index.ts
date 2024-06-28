@@ -9,3 +9,4 @@ export { default as setActiveIssue } from './setActiveIssue';
 export { default as setEstimatedPoint } from './setEstimatedPoint';
 export { default as deleteIssue } from './deleteIssue';
 export { default as editIssue } from './editIssue';
+export { default as kickOutPlayer } from './kickOutPlayer';

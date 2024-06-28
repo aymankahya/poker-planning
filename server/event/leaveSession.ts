@@ -8,7 +8,7 @@ type User = {
   role: 'user' | 'guest';
 };
 
-const leaveSession = async (roomId: string, user: User, socket: Socket) => {
+const leaveSession = async (roomId: string, user: Omit<User, 'username'>, socket: Socket) => {
   try {
     const session = await Session.findById(roomId).exec();
     if (!session) return socket.emit('session-left');
