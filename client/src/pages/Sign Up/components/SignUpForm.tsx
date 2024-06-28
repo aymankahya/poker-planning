@@ -6,6 +6,7 @@ import { Form } from '@/components/ui/form';
 import FormField from '@/components/common/form/FormField';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
+import useSignup from '@/hooks/useSignup';
 
 const SignUpFormSchema = z
   .object({
@@ -44,9 +45,10 @@ const SignUpFormSchema = z
     }
   });
 
-type SignUpFormFields = z.infer<typeof SignUpFormSchema>;
+export type SignUpFormFields = z.infer<typeof SignUpFormSchema>;
 
 export default function SignUpForm() {
+  const { loading, signup } = useSignup();
   const form = useForm<SignUpFormFields>({
     resolver: zodResolver(SignUpFormSchema),
     defaultValues: {
@@ -59,19 +61,7 @@ export default function SignUpForm() {
   });
 
   const onSubmit: SubmitHandler<SignUpFormFields> = async (data) => {
-    // To be added in a seperate custom hook => useSignup
-    await fetch(`${import.meta.env.VITE_SERVER_URL}/sign-up`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        firstName: data.firstName,
-        lastName: data.lastName,
-        email: data.email,
-        password: data.password,
-      }),
-    });
+    signup(data);
   };
   return (
     <Card className="z-30 mx-5 md:m-0 md:w-[500px]">
@@ -94,7 +84,9 @@ export default function SignUpForm() {
               label="Password Confirmation"
               placeholder="Confirm your password"
             />
-            <Button type="submit">Sign In</Button>
+            <Button disabled={loading} type="submit">
+              Sign In
+            </Button>
           </form>
         </Form>
         <p className="typography-small flex justify-center mt-5 gap-1">
