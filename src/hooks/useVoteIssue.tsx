@@ -13,7 +13,7 @@ export default function useVoteIssue() {
   const { toast } = useToast();
 
   const handleVoteIssue = (issueId: string) => {
-    if (!session?.settings.adminAll && !session?.admin.includes(user?.id.toString() ?? '')) {
+    if (!session?.admin.includes(user?.id.toString() ?? '')) {
       return toast({
         title: "You don't have permission to manage issues",
         description: 'Change "who can manage issues" at game settings',

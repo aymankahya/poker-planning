@@ -16,7 +16,7 @@ export default function RoomTable() {
   let tableState = 'pick';
   const hasVoted = Object.keys(session?.currentVotes ?? {}).includes(user?.id.toString() ?? '');
   const allVoted = Object.keys(session?.currentVotes ?? {}).length === players.length;
-  const isAdmin = session?.admin.includes(user?.id.toString() ?? '') || session?.settings.adminAll;
+  const isAdmin = session?.admin.includes(user?.id.toString() ?? '');
   const voteDone = session?.votingState === 'completed';
 
   if (hasVoted && isAdmin && allVoted && !voteDone) {
