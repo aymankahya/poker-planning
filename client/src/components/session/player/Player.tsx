@@ -27,7 +27,7 @@ export default function Player({ playerInfo = { id: '', username: 'Anonymous' },
           <p className="text-sm text-center font-bold cursor-pointer max-[640px]:text-xs">{playerInfo.username}</p>
         </div>
       }
-      hoverContent={<KickOutButton />}
+      hoverContent={<KickOutButton player={playerInfo} />}
       delay={10}
       side={side}
     />
