@@ -8,10 +8,15 @@ import CreateCustomVotingSystem from '@/components/session/create/CustomVotingSy
 export default function Home() {
   return (
     <div className="z-20 flex flex-col items-center gap-2 h-dvh justify-center -mt-17 md:-mt-32 ">
-      <Button className="group flex gap-2 items-center text-zinc-300 text-sm w-fit px-5 py-1.5 rounded-full bg-black cursor-pointer hover:text-white hover:bg-black focus:text-white transition-all ease-in-out duration-300">
-        <Github className="text-zinc-300 group-hover:text-white group-focus:text-white transition-all duration-300 ease-in-out" />
-        See GitHub Repo{' '}
-        <ArrowRight className="w-4 h-5 text-zinc-300 group-hover:translate-x-1 group-focus:translate-x-1 group-hover:text-white group-focus:text-white transition-all duration-300 ease-in-out" />
+      <Button
+        asChild
+        className="group flex gap-2 items-center text-zinc-300 text-sm w-fit px-5 py-1.5 rounded-full bg-black cursor-pointer hover:text-white hover:bg-black focus:text-white transition-all ease-in-out duration-300"
+      >
+        <a href="https://github.com/aymankahya/poker-planning" target="_blank">
+          <Github className="text-zinc-300 group-hover:text-white group-focus:text-white transition-all duration-300 ease-in-out" />
+          See GitHub Repo{' '}
+          <ArrowRight className="w-4 h-5 text-zinc-300 group-hover:translate-x-1 group-focus:translate-x-1 group-hover:text-white group-focus:text-white transition-all duration-300 ease-in-out" />
+        </a>
       </Button>
       <div className="flex flex-col gap-3 items-center max-[780px]:max-w-[40rem] mt-5 px-5">
         <h1 className="text-4xl font-extrabold min-[355px]:text-5xl min-[570px]:text-5xl min-[785px]:text-7xl text-center">
