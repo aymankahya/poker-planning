@@ -1,8 +1,14 @@
 import { useToast } from '@/components/ui/use-toast';
 import useAuth from '@/hooks/useAuth';
 import useSettings from '@/hooks/useSettings';
-import { SignUpFormFields } from '@/pages/Sign Up/components/SignUpForm';
 import { useState } from 'react';
+
+type SignUpData = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+};
 
 export default function useSignup() {
   const [loading, setLoading] = useState<boolean>(false);
@@ -10,7 +16,7 @@ export default function useSignup() {
   const { setUser } = useAuth();
   const { setSettings } = useSettings();
 
-  const signup = async (data: Omit<SignUpFormFields, 'confirmPassword'>) => {
+  const signup = async (data: SignUpData) => {
     setLoading(true);
     const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/sign-up`, {
       method: 'POST',
@@ -49,7 +55,7 @@ export default function useSignup() {
 
       window.location.href = '/';
 
-      return;
+      return true;
     }
 
     setLoading(false);
