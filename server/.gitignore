@@ -63,3 +63,6 @@ typings/
 # keys
 rsa_key_prv.pem
 rsa_key_pub.pem
+
+# dist folder
+dist

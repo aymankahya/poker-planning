@@ -1,4 +1,4 @@
-import { FormField, CheckBoxFormField } from '@/components/common/form/';
+import { FormField } from '@/components/common/form/';
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -14,13 +14,11 @@ const CreateSessionFormGuestUserSchema = z.object({
   guestName: z.string().min(3, { message: 'Player name must be at least 3 characters long' }),
   sessionName: z.string().min(3, { message: 'Session name must be at least 3 characters long' }),
   voteSystem: z.number({ required_error: 'You must choose a voting system' }),
-  adminAll: z.boolean().optional(),
 });
 
 const CreateSessionFormAuthUserSchema = z.object({
   sessionName: z.string().min(3, { message: 'Session name must be at least 3 characters long' }),
   voteSystem: z.number({ required_error: 'You must choose a voting system' }),
-  adminAll: z.boolean().optional(),
 });
 
 type CreateSessionFormFields =
@@ -38,12 +36,10 @@ export default function CreateSessionForm() {
   const defaultValues = isAuth
     ? {
         sessionName: '',
-        adminAll: false,
       }
     : {
         guestName: '',
         sessionName: '',
-        adminAll: false,
       };
 
   const form = useForm<CreateSessionFormFields>({
@@ -78,7 +74,6 @@ export default function CreateSessionForm() {
           label="Voting system"
           placeholder="Choose a voting system"
         />
-        <CheckBoxFormField name="adminAll" form={form} label="Allow members to manage session" className="mt-5" />
 
         <Button type="submit" disabled={loading} className="w-fit self-end">
           Create Session

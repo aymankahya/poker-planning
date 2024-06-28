@@ -59,9 +59,7 @@ export default function IssueSideBar() {
           <Button
             variant="ghost"
             onClick={() => setShowAddIssueForm(true)}
-            disabled={
-              showAddIssueForm || (!session?.settings.adminAll && !session?.admin.includes(user?.id.toString() ?? ''))
-            }
+            disabled={showAddIssueForm || !session?.admin.includes(user?.id.toString() ?? '')}
             className="flex items-center justify-start gap-2 text-md text-gray-400 w-full"
           >
             <Plus />

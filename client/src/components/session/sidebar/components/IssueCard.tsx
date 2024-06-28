@@ -96,9 +96,7 @@ export default function IssueCard({ issueId, type, title, estimatedPoints, activ
                 value={estimatedPoints}
                 className={cx({ 'bg-slate-600 text-white hover:bg-slate-700': active })}
                 hideHoverContentOnOpen={setOpenPopover}
-                open={
-                  !session?.settings.adminAll && !session?.admin.includes(user?.id.toString() ?? '') ? false : undefined
-                }
+                open={!session?.admin.includes(user?.id.toString() ?? '') ? false : undefined}
               />
             }
             hoverContent={
@@ -110,9 +108,7 @@ export default function IssueCard({ issueId, type, title, estimatedPoints, activ
             sideOffset={-5}
             align="end"
             alignOffset={-15}
-            open={
-              !session?.settings.adminAll && !session?.admin.includes(user?.id.toString() ?? '') ? false : undefined
-            }
+            open={!session?.admin.includes(user?.id.toString() ?? '') ? false : undefined}
           />
         </div>
         {deleteConfirmationOpened && (

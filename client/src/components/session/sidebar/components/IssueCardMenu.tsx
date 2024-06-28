@@ -30,8 +30,7 @@ export default function IssueCardMenu({ handleEditIssue, handleDeleteIssue, acti
     <DropdownMenu>
       <DropdownMenuTrigger
         className={cx({
-          'pointer-events-none opacity-0':
-            !session?.settings.adminAll && !session?.admin.includes(user?.id.toString() ?? ''),
+          'pointer-events-none opacity-0': !session?.admin.includes(user?.id.toString() ?? ''),
         })}
       >
         <EllipsisVertical
