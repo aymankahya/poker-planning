@@ -2,6 +2,14 @@
 
 Welcome to this Planning Poker Application repository ! This project showcases a full-stack application designed to facilatate planning poker sessions for agile teams. The application is built using modern web technologies and follows best practices for both client-side and server-side development.
 
+# Application Design Overview
+## Home Page
+![image](https://github.com/aymankahya/poker-planning/assets/63832251/b50f96f9-4a87-4060-ac40-ce317488281f)
+
+## Voting Session
+![image](https://github.com/aymankahya/poker-planning/assets/63832251/b56ae41f-b294-4e75-b0b2-4473f2f09eb6)
+
+
 # Table of Contents
 
 1. [Project Overview](#project-overview)
