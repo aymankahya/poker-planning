@@ -1,4 +1,12 @@
-# Agile Scrum Poker Web Application
+<h1 align="center">
+  Agile Scrum Poker Web Application
+</h1>
+
+<p align="center">
+  <a href="https://app.netlify.com/sites/planningpokeragile/deploys" target="_blank">
+    <img src="https://api.netlify.com/api/v1/badges/1963b488-7b78-48c9-9e2d-6fb5e47ab3af/deploy-status" alt="Netlify Status" />
+  </a>
+</p>
 
 Welcome to this Planning Poker Application repository ! This project showcases a full-stack application designed to facilatate planning poker sessions for agile teams. The application is built using modern web technologies and follows best practices for both client-side and server-side development.
 
@@ -22,7 +30,7 @@ Welcome to this Planning Poker Application repository ! This project showcases a
 8. [Running the application](#running-the-application)
 9. [Contributing](#contributing)
 
-## Projet Overview
+## Project Overview
 
 The Planning Poker Application is a tool for agile teams to estimate the effort required for various tasks. It allows users to create sessions, invite team memebers and vote on issues using planning poker approach. The application consists of a React-based client and Node/Express-based server with real-time communication facilitated through Socket.IO.
 
